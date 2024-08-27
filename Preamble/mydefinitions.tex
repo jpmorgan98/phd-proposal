@@ -1,0 +1,166 @@
+%----------------------------------------------------------------------------------------
+%	COMMANDS FOR THE THESIS
+%----------------------------------------------------------------------------------------
+
+\newcommand{\name}{Joanna Piper Morgan} % Author name
+\newcommand{\thesistitle}{Piper's Ponderings} % Title of the thesis
+\newcommand{\submissiondate}{September, 2024} % Submission date "Month, year"
+\newcommand{\advisor}{Kyle E. Niemeyer} % Supervisor name
+%\newcommand{\coadvisor}{Someone Someone} % Co-Supervisor name, comment this line if there is none
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY STYLE (pick the style you want)
+%----------------------------------------------------------------------------------------
+
+\usepackage[square, numbers, sort&compress]{natbib} % for bibliography - Square brackets, citing references with numbers, citations sorted by appearance in the text and compressed (as in [4-7])
+%\usepackage[longnamesfirst,round]{natbib} % Natural Sciences bibliography
+
+\bibliographystyle{Preamble/physics_bibstyle} % You may use a different style adapted to your field
+%\bibliographystyle{unsrtnat} % You may use a different style adapted to your field
+
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES (be careful of package interaction)
+%----------------------------------------------------------------------------------------
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts, amstext, bm, bbm, mathtools} % Math symbols
+\usepackage{graphicx, subfigure, caption, epsfig, psfrag} % Figures
+\usepackage{threeparttable, colortbl, multirow} % Tables
+\usepackage{soul, pifont, color, hyperref, bbding, textcomp, manfnt, latexsym, wasysym} % Fonts
+\usepackage{enumitem}
+\usepackage[ruled, vlined]{algorithm2e}
+% \usepackage[makeroom]{cancel}
+\usepackage{lscape}
+\usepackage{pdfpages}
+
+%----------------------------------------------------------------------------------------
+%	DEFINITIONS AND COMMANDS
+%----------------------------------------------------------------------------------------
+
+% Defining a theorem box for Criteria
+\newtheorem{critere}{Criterion}
+\newcommand{\crit}[2]{
+\begin{center}  
+\fbox{ \begin{minipage}[c]{0.9 \textwidth}
+\begin{critere}
+\textbf{\textup{ #1}} --- #2
+\end{critere}
+\end{minipage}  } \end{center}
+}
+
+\newcommand{\todo}[1]{\textcolor{red}{(#1)}}
+% todo command from https://tex.stackexchange.com/questions/247681/how-to-create-checkbox-todo-list
+% \usepackage{enumitem}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+% \usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}%
+{\large\hspace{1pt}\cmark}}\hspace{-2.5pt}}
+\newcommand{\cancel}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+\newcommand{\eg}{\textit{e.g.}}
+\newcommand{\ie}{\textit{i.e.}}
+
+% General
+\newcommand{\bea}{\begin{eqnarray}} % Shortcut for equation arrays
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\defin}{\triangleq}
+\newcommand{\pdiff}[2]{ \frac{ \partial #1 }{ \partial #2 } }
+\newcommand{\red}[1]{{\color{red}\textbf{#1}}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\green}[1]{{\color{ForestGreen}\textbf{#1}}}
+\newcommand{\tal}[1]{\textbf{\alert{#1}}}
+
+% Attenuation equation
+\newcommand{\StmD}{\Sigma_t^\Delta \Delta x}
+\newcommand{\StdD}{\Sigma_t^\Delta \Delta x}
+\newcommand{\Stm}{\Sigma_{t,m}^{0}}
+\newcommand{\Std}{\Sigma_{t,m}^{\Delta}}
+
+% Var and EE
+\newcommand{\Var}[1]{\mathbb{V}ar\left[#1\right]}
+\newcommand{\EE}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\Cov}[2]{\mathbb{C}ov\left[#1,#2\right]}
+
+% Xi
+\newcommand{\EExi}[1]{\mathbb{E}_\xi\left[#1\right]}
+\newcommand{\Vxi}[1]{\mathbb{V}ar_\xi\left[#1\right]}
+\newcommand{\Nxi}{{N_\xi}}
+\newcommand{\xii}{\xi^{(i)}}
+\newcommand{\sumxi}{\sum_{i=1}^{\Nxi}}
+
+% Eta
+\newcommand{\EEeta}[1]{\mathbb{E}_\eta\left[#1\right]}
+\newcommand{\Veta}[1]{\mathbb{V}ar_\eta\left[#1\right]}
+\newcommand{\Neta}{{N_\eta}}
+\newcommand{\etaj}{\eta^{(j)}}
+\newcommand{\etak}{\eta^{(k)}}
+\newcommand{\Zeta}{ {Z_\eta} }
+\newcommand{\muRT}{\hat{\mu}_{\SigSqRT}}
+\newcommand{\sumeta}{\sum_{j=1}^\Neta}
+
+% Estimators
+\newcommand{\Qpoll}{\tilde{Q}}
+\newcommand{\Qhat}{\hat{Q}}
+\newcommand{\SigSqeta}{\sigma^2_\eta}
+\newcommand{\SigSqRT}{\sigma^2_{RT,\Neta}}
+\newcommand{\hatSigSqeta}{\hat{\sigma}^2_\eta}
+\newcommand{\fij}{f(\xii,\etaj)}
+\newcommand{\f}{f(\xi,\eta)}
+\newcommand{\ft}{\tilde{f}}
+
+% Omega
+\newcommand{\EEom}[1]{\mathbb{E}_\omega\left[#1\right]}
+\newcommand{\Vom}[1]{\mathbb{V}ar_\omega\left[#1\right]}
+\newcommand{\Nom}{{N_\omega}}
+\newcommand{\EExo}[1]{\mathbb{E}_{\xi,\omega}\left[#1\right]}
+\newcommand{\Vxo}[1]{\mathbb{V}ar_{\xi,\omega}\left[#1\right]}
+\newcommand{\Qxo}{Q\left(\xi,\omega\right)}
+\newcommand{\PE}{ {\mathbb{P}_{\mathbb{E}}} }
+\newcommand{\Pxi}{ \mathbb{P}_{\mathbb{E | \xi}} }
+\newcommand{\PEpollom}{ \tilde{\mathbb{P}}^{\mathbb{E}}_{\Nom} }
+
+% SM Example problem
+\newcommand{\T}[1][]{T^{#1}\left( \xi, \omega \right)}
+\newcommand{\PA}{p_1}
+\newcommand{\SA}{\Sigma_{t,1}}
+\newcommand{\SB}{\Sigma_{t,2}}
+\newcommand{\SC}{\Sigma_{t,3}}
+\newcommand{\StC}{\Sigma_{t,3}^{0}}
+\newcommand{\StCd}{\Sigma_{t,3}^{\Delta}}
+\newcommand{\Dx}{ \Delta x}
+\newcommand{\DxA}{ \Delta x_A}
+\newcommand{\DxB}{ \Delta x_B}
+\newcommand{\Nt}{N_{tot}}
+\newcommand{\NA}{N_1(\omega)}
+\newcommand{\FAB}{F(\xi_A,\xi_B)}
+\newcommand{\Fm}{F_0}
+\newcommand{\Fd}{F_{\Delta}(\xi_A,\xi_B)}
+\newcommand{\xiA}{\xi_A}
+\newcommand{\xiB}{\xi_B}
+\newcommand{\Bom}{B_\omega(x)}
+\newcommand{\Bomy}{B_\omega(y)}
+\newcommand{\intsin}[1]{\frac{ \sinh\left[ #1 \right] }{ #1 }}
+\newcommand{\e}[1]{\exp \left( #1 \right) }
+\newcommand{\sinhh}[1]{\text{sinh}\left[ #1 \right]}
+\newcommand{\g}{\, | \,}
+
+
+% PCE
+\newcommand{\xiu}{{\xi_u}}
+\newcommand{\xinu}{{\xi_{\sim u}}}
+\newcommand{\Nsi}{{N_{SI}}}
+\newcommand{\EEu}[1]{\mathbb{E}_{\xiu} \left[#1\right]}
+\newcommand{\EEnu}[1]{\mathbb{E}_{\xinu} \left[#1\right]}
+\newcommand{\Vu}[1]{\mathbb{V}ar_{\xiu}\left[#1\right]}
+\newcommand{\Vnu}[1]{\mathbb{V}ar_{\xinu} \left[#1\right]}
+\newcommand{\Ppoll}{\tilde{P}_\Nsi}
+\newcommand{\hf}{\mathrm{HF}}
+\newcommand{\LF}{\mathrm{LF}}
+\newcommand{\kn}{{\Large\dbend\normalsize\hspace{1mm}}}
+\newcommand{\PCE}{Q^{PC}}
+\newcommand{\PCvar}{\hat{\sigma}^{2}_{PC}}
+

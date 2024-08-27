@@ -1,0 +1,154 @@
+\chapter{Introduction} \label{ch-1}
+
+It is part of the student's training in research to prepare a concise, rigorous, and scholarly thesis proposal and present it in the correct format. There is no strict length requirement for the thesis proposal. It is anticipated that most students will need 8,000-10,000 words (about twenty pages of text) to adequately explain the motivation and goals of their project, review the relevant literature, and describe progress to date. However, concise proposals are encouraged, and a proposal of 5,000 words, which covered all these points, would be perfectly acceptable. 
+
+The complete doctoral thesis proposal document must be submitted to the Graduate School by the due date as nominated by the Dean (an example of the standard deadlines relating to examinations activities is included above). Earlier submission may be required in order to provide the thesis proposal to the examination panel no later than four weeks (28 days) prior to the oral defense. An emergency exception to the standard due date deadline can be granted by the Dean on the basis of a written request from the supervisor.
+
+The following descriptions are sections that must be included in the proposal.
+
+\textbf{Front page}: use the one provided in this template, after changing the values like names in the file \texttt{Preamble/mydefinitions.tex}.
+
+\textbf{Abstract}: There should be a single paragraph of not more than 500 words, which concisely summarizes the entire proposal, written in the file \texttt{Preamble/ mydefinitions.tex}.
+
+\textbf{Bibliography}: The bibliography should include all references cited in the text and should not include references that have not been cited. In preparing the bibliography, students may use any of the conventional styles of referencing that include the titles of articles, such as the Harvard, Vancouver or ACS systems. However, the style chosen must be used consistently and correctly throughout, both for in-text citations, and formatting of bibliographic entries. We recommend using BibTeX or BibLaTeX and through the file \texttt{Preamble/Thesis\_bibliography.bib} and referencing citations like this \cite{Lee98, Muc10, Kra27}. 
+
+\textbf{Appendices}: These are optional and should only be used if necessary.
+
+The main text of the proposal should contain the following sections.
+
+\section{Introduction and Literature Review}
+
+This should include a statement of the problem, the overall aims, and background to the research including a review of relevant existing work (literature review). The literature review should be a concise, scholarly review of the literature explaining the background to the proposed research. The review should provide the context for the aims of the proposed research in relation to existing work on the topic.
+
+\section{Research Plan}
+
+ This should begin with the specific aims of the research and provide a concrete plan for completion of the research including the design and methods. This section should include an explanation of how the methods will address the aims and the significance of the results for the field.
+
+\section{Progress Report}
+
+This should be a report on the research achievements of the student in the laboratory of the proposed supervisor during Preliminary Thesis Research. The report should not duplicate material previously submitted for evaluation as part of a previous degree, but may include work completed during rotations at OIST. The report may include examples of results obtained with the methods proposed. It is understood that results may not be available in projects requiring, for example, development of methods, sample preparation, or recruitment of participants, in which case other evidence of progress should be reported.
+
+
+\chapter{Objectives} \label{ch-2}
+
+This is a practical guide into how to use this template, by explaining the role of the different folders and files.
+
+If some practices seem like overkill for a 20 page proposal (splitting the content across different files), that is because it probably is, but we built it this way because the PhD thesis template is structured identically. That means that you will be able to incorporate this document into your thesis seamlessly.
+
+\section{Folders}
+
+The main folder contains three folders detailed here:
+
+\begin{itemize}
+
+\item \textbf{Images.} This folder should contain all the images that you will use in your thesis. It can contain subfolders, for example one for each chapter. To include an image from the main text, use something like \texttt{\textbackslash includegraphics\{subfolder/image.jpg\} } without worrying about the path to the \texttt{Images} folder.
+
+\item \textbf{MainText.} This folder contains a series of \LaTeX\ files that form the main text: chapters and appendices. The PhD thesis template also has Introduction and Conclusion, here you can include them in the chapters.
+
+\item \textbf{Preamble.} This folder contains a series of \LaTeX\ files with the pages that will appear before the main text. Please write (or copy and paste) your own text in those files and delete the dummy text when appropriate. The files are:
+\begin{itemize}
+\item \texttt{abstract.tex} --- Abstract. Follow directions in the file.
+\item \texttt{mydefinitions.tex} --- \textbf{Important} --- This file should contain all the values relevant for the title page (name, thesis title, etc, which will be used automatically in the title and various preamble files), your bibliography style, all packages you need for your thesis and your custom definition and commands. Be careful of not importing a package that has already been imported in \texttt{xxx\_Thesis.tex}, and be aware that some packages might interfere with each other.
+\item \texttt{physics\_bibstyle.bst} --- Bibliography style file modified by Jeremie Gillet in 2011 to suit his thesis. Might be suitable for physics. If you want to use another custom bibliography style, include the file in this folder.
+\item \texttt{Thesis\_bibliography.bib} --- BibTeX file containing your bibliography.
+\end{itemize}
+
+The PhD thesis template includes several other files, such as Acknowledgments or Glossary.  
+
+\end{itemize}
+
+\section{\texttt{Thesis\_proposal.tex}}
+
+This is the main files, the only one that need to be compiled to build the document. Compile once with \LaTeX, once with BibTeX and finally twice with \LaTeX\ to get all the references right.
+
+Let's go through each section and comment them briefly. The last section will emphasize the differences between the two files.
+
+\subsection{PACKAGES AND OTHER DOCUMENT CONFIGURATIONS}
+
+This section contains the minimum number of packages and definitions to compile the thesis. No line should be removed or modified.
+
+\subsection{ADD YOUR CUSTOM VALUES, COMMANDS AND PACKAGES}
+
+This section should not be modified directly. Instead, your packages and definitions should be included in  \texttt{Preamble/mydefinitions.tex}.
+
+\subsection{TITLE PAGE}
+
+Creates the title page. Do not modify.
+
+\subsection{PREAMBLE PAGES}
+
+Structures the style (header) for the preamble pages and builds them. Do not modify.
+
+\subsection{LIST OF CONTENTS/FIGURES/TABLES}
+
+Creates the list of contents. Do not modify.
+
+\subsection{THESIS MAIN TEXT}
+
+Structures the style for the main text chapters and builds them. 
+
+\subsection{APPENDICES}
+
+Structures the style for the appendices and builds them. The appendices are numbered with letters but are structured like regular chapters.
+
+\subsection{BIBLIOGRAPHY}
+
+Builds the bibliography. The style of the bibliography can be defined in \texttt{Preamble/mydefinitions.tex}.
+\chapter{Literature review} \label{ch-3}
+
+\section{Figures}
+
+\begin{figure}
+\center
+\includegraphics[width=0.3\textwidth]{chap3/emblem.jpg} 
+\caption[Short caption for List of Figures]{{\bfseries Short caption (if wanted).} Full caption with all the details here.}
+\label{fig-example}
+\end{figure}
+
+\begin{figure}
+\center
+\includegraphics[width=0.3\textwidth]{chap3/symbol.jpg} 
+\caption*{This secret image won't be numbered and won't appear in the List of Figures because of the *}
+\end{figure}
+
+Figures should appear as close as possible to the first mention of them in the text. All figures must be referred to in the text by either a parenthetical mark-up (Figure~\ref{fig-example}) or a phrasing such as ``Sequencing data, shown in Figure~\ref{fig-example}, shows that...''.  A parenthetical mention, but not an in-text mention, may be abbreviated as (Fig.~\ref{fig-example}).  The number of the chapter should be part of the Figure number.
+
+Figures must be accompanied by a caption that describes the material clearly and succinctly. Figure captions may start with a brief title in bold, which can then be referenced in the list of figures. 
+
+Figures should not have captions that run across pages, as a general rule. If a figure and its caption will be larger than a page, consider rewriting the caption, or reorganizing the figure.  If this cannot be avoided, the figure caption should continue on the immediate next page, with a reference comment at the start of the text to the fact that it is a continuation of the caption from the previous page.  No other main body text should then appear on that page.
+
+\section{Tables}
+
+\begin{table} 
+\center
+\caption{Short heading for the List of Tables.}
+\begin{tabular}{c|c}
+Parameter & Value \\ \hline \hline
+$\Delta$ & 0, 150 \\
+${\alpha}$ & 85 \\
+${\epsilon}$ & 6 \\
+${\kappa}$ & 6.8 \\
+${\gamma}$ & 0.2
+\end{tabular}
+\label{tab-values}
+\caption*{Full caption with all the details here.}
+\end{table}
+
+\begin{table} \center
+\begin{tabular}{c|c}
+Parameter & Value \\ \hline \hline
+$\Delta$ & 0, 1500 \\
+${\alpha}$ & 850 \\
+${\epsilon}$ & 60 \\
+${\kappa}$ & 68 \\
+${\gamma}$ & 2
+\end{tabular}
+\caption*{This secret table won't be numbered and won't appear in the List of Figures because of the * }
+\end{table}
+
+All tables should be referred to in the text by number (for example) ``Table ~\ref{tab-values} describes all particles found in...''.  Tables may be printed in landscape mode rather than portrait mode, but must then be printed on a separate page (with continuing and sequential pagination). Tables may extend for more than one page, but should then have the table header row repeated on each page. Do not use font sizes smaller than 9 point. Tables should have a heading and may have a caption.  The number of the chapter should be part of the Table number.
+
+
+\section{Images}
+
+Images are vital to the presentation of scientific data.  Ensure that all textual annotations are correctly labeled, and that legends (if provided) are clear and legible.  Use small symbols on charts for data points.  Ensure that axis marks and axis labels are large enough to read clearly.  Use all the white space where possible.  Provide meaningful headings for charts, as well as a caption explaining the data. Be aware of the expected standards covering image manipulation and the standard practice for image presentation in your field, and adhere to them.  In particular, avoid excessive density, contrast, and hue manipulation of photographic images.  Where extensive manipulation of images is required for data extraction or analysis, this must be clearly explained as part of your methods, and explicitly in the caption for each figure.
