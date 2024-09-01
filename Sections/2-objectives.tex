@@ -1,2 +1,30 @@
 \chapter{Objectives}
 \label{ch:objectives}
+
+\section{GPU enabled time dependent neutron radiation transport}
+Develope codes and proceedutres using portability frameworks with a demphsis on writing device kernels 
+\begin{todolist}
+    \item[done] Compare portability frameworks for deployment on both GPU and CPU platforms in a transient Monte Carlo neutron transport code
+    \item[] blah
+\end{todolist}
+
+
+\section{Explorations into GPU optimized Deterministic Schems}
+\begin{todolist}
+    \item[] Derive discretization scheme for time dependent, multi-group, Sn, neutron transport in slab geometry
+    \item[] Conduct fourier analysis to show the stability of the discretization scheme
+    \item[] Implement a mono-energetic proof of concept of discritization schems in both Source itterations and One-cell inversions in a Python code for both CPUs and GPUs
+    \item[] Use the method of manufactured solution to verify the discretization scheme in mono-energetic problems and measure its convergence rate.
+    \item[] Implement discretization scheme in both a Source iteration and One-cell inversion iterative scheme performantly on GPUs and meausre wall clock runtime
+    \item[] Publish this work
+\end{todolist}
+
+\section{Exploration of Acceleration Schemes and/or Preconditioners}
+
+\begin{todolist}
+    \item[] Implement diffusion synthetic acceleration to Source iteration to have a comparison
+    \item[] blahs
+
+\section{Challenge problem}
+
+\section{Possible difficulties and contingencies}

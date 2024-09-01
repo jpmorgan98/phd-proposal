@@ -104,258 +104,1018 @@
 
 
 
-@book{smithUQ,
-    author = {Ralph C Smith},
-    title = {Uncertainty Quantification: Theory, Implementation, and Applications},
-    volume = {12},
-    publisher = {SIAM},
-    address = {},
-    year = {2013}
+
+@article{adams_fast_2002,
+	title = {Fast iterative methods for discrete-ordinates particle transport calculations},
+	volume = {40},
+	issn = {0149-1970},
+	url = {https://www.sciencedirect.com/science/article/pii/S0149197001000233},
+	doi = {10.1016/S0149-1970(01)00023-3},
+	number = {1},
+	journal = {Progress in Nuclear Energy},
+	author = {Adams, Marvin L. and Larsen, Edward W.},
+	year = {2002},
+	keywords = {acceleration, discrete ordinates, iteration, transport},
+	pages = {3--159},
 }
 
-@book{saltelliGSA,
-    author = {Andrea Saltelli and others},
-    title = {Global Sensitivity Analysis: The Primer},
-    publisher = {John Wiley \& Sons, Inc.},
-    address = {United Kingdom},
-    year = {2008}
+@article{baker_sn_2017,
+	title = {An {SN} {Algorithm} for {Modern} {Architectures}},
+	volume = {185},
+	url = {https://doi.org/10.13182/NSE15-124},
+	doi = {10.13182/NSE15-124},
+	number = {1},
+	journal = {Nuclear Science and Engineering},
+	author = {Baker, Randal S.},
+	year = {2017},
+	note = {Publisher: Taylor \& Francis\_eprint: https://doi.org/10.13182/NSE15-124},
+	pages = {107--116},
 }
 
-@article{zhang-survey,
-    author = {Jiaxin Zhang},
-    title = {Modern Monte Carlo methods for efficient uncertainty quantification and propagation: a survey},
-    journal = {Wiley Interdisciplinary Reviews},
-    volume = {13},
-    year = {2021},
-    number = {5},
-    pages = {e1539},
-    doi = {https://doi.org/10.1002/wics.1539}
+@techreport{kunen_porting_2019,
+	title = {Porting {3D} {Discrete} {Ordinates} {Sweep} {Algorithm} in {Ardra} to {CUDA}},
+	url = {https://www.osti.gov/biblio/1559411},
+	abstract = {The U.S. Department of Energy's Office of Scientific and Technical Information},
+	language = {English},
+	number = {LLNL-CONF-773204},
+	urldate = {2024-04-18},
+	institution = {Lawrence Livermore National Lab. (LLNL), Livermore, CA (United States)},
+	author = {Kunen, A. and Loffeld, J. and Black, A. and Chen, R. and Nowak, P. and Haut, T. and Bailey, T. and Brown, P. and Rennich, S. and Maginot, P. and Tagani, B.},
+	month = apr,
+	year = {2019},
 }
 
-@book{ghanem-uq-handbook,
-    author = {Roger Ghanem and David Higdon and Houman Owhadi},
-    title = {Handbook of Uncertainty Quantification},
-    publisher = {Springer International Publishing},
-    address = {Switzerland},
+@article{evans_denovo_2010,
+	title = {Denovo: {A} {New} {Three}-{Dimensional} {Parallel} {Discrete} {Ordinates} {Code} in {SCALE}},
+	volume = {171},
+	issn = {0029-5450},
+	shorttitle = {Denovo},
+	url = {https://doi.org/10.13182/NT171-171},
+	doi = {10.13182/NT171-171},
+	number = {2},
+	urldate = {2024-04-18},
+	journal = {Nuclear Technology},
+	author = {Evans, Thomas M. and Stafford, Alissa S. and Slaybaugh, Rachel N. and Clarno, Kevin T.},
+	month = aug,
+	year = {2010},
+	note = {Publisher: Taylor \& Francis
+\_eprint: https://doi.org/10.13182/NT171-171},
+	pages = {171--200},
+}
+
+@techreport{alcouffe_time-dependent_1998,
+	title = {Time-dependent deterministic transport on parallel architectures using {PARTISN}},
+	url = {https://www.osti.gov/biblio/663199},
+	language = {English},
+	number = {LA-UR-98-272; CONF-980403-},
+	urldate = {2024-04-18},
+	institution = {Los Alamos National Lab. (LANL), Los Alamos, NM (United States)},
+	author = {Alcouffe, R. E. and Baker, R. S.},
+	month = jul,
+	year = {1998},
+}
+
+@article{gong_particle_2012,
+	title = {Particle transport with unstructured grid on {GPU}},
+	volume = {183},
+	issn = {0010-4655},
+	url = {https://www.sciencedirect.com/science/article/pii/S0010465511003870},
+	doi = {10.1016/j.cpc.2011.12.002},
+	number = {3},
+	urldate = {2024-04-18},
+	journal = {Computer Physics Communications},
+	author = {Gong, Chunye and Liu, Jie and Huang, Haowei and Gong, Zhenghu},
+	month = mar,
+	year = {2012},
+	keywords = {Discontinuous finite element method, Discrete ordinate method, GPU, Particle transport, Unstructured grid},
+	pages = {588--593},
+}
+
+@article{hoagland_hybrid_2021,
+	title = {Hybrid approaches for accelerated convergence of block-{Jacobi} iterative methods for solution of the neutron transport equation},
+	volume = {439},
+	issn = {0021-9991},
+	url = {https://www.sciencedirect.com/science/article/pii/S0021999121002771},
+	doi = {10.1016/j.jcp.2021.110382},
+	urldate = {2024-04-18},
+	journal = {Journal of Computational Physics},
+	author = {Hoagland, Dylan S. and Azmy, Yousry Y.},
+	month = aug,
+	year = {2021},
+	keywords = {Deterministic, Hybrid methods, Iterative methods, Neutron transport, Parallel},
+	pages = {110382},
+	file = {ScienceDirect Snapshot:/Users/jonesy/Zotero/storage/3ZKM6KUP/S0021999121002771.html:text/html},
+}
+
+@article{anistratov_iterative_2015,
+	title = {Iterative stability analysis of spatial domain decomposition based on block {Jacobi} algorithm for the diamond-difference scheme},
+	volume = {297},
+	issn = {0021-9991},
+	url = {https://www.sciencedirect.com/science/article/pii/S0021999115003678},
+	doi = {10.1016/j.jcp.2015.05.033},
+	urldate = {2024-04-18},
+	journal = {Journal of Computational Physics},
+	author = {Anistratov, Dmitriy Y. and Azmy, Yousry Y.},
+	month = sep,
+	year = {2015},
+	keywords = {Domain decomposition, Fourier analysis, Iterative methods, Particle transport equation, Radiative transfer equation},
+	pages = {462--479},
+	file = {ScienceDirect Snapshot:/Users/jonesy/Zotero/storage/HGFZXGHA/S0021999115003678.html:text/html},
+}
+
+@article{rosa_cellwise_2013,
+	title = {A {Cellwise} {Block}-{Gauss}-{Seidel} {Iterative} {Method} for {Multigroup} {SN} {Transport} on a {Hybrid} {Parallel} {Computer} {Architecture}},
+	volume = {174},
+	issn = {0029-5639},
+	url = {https://doi.org/10.13182/NSE12-57},
+	doi = {10.13182/NSE12-57},
+	number = {3},
+	urldate = {2024-04-18},
+	journal = {Nuclear Science and Engineering},
+	author = {Rosa, Massimiliano and Warsa, James S. and Perks, Michael},
+	month = jul,
+	year = {2013},
+	note = {Publisher: Taylor \& Francis
+\_eprint: https://doi.org/10.13182/NSE12-57},
+	pages = {209--226},
+}
+
+@article{variansyah_robust_2021,
+	title = {A ROBUST SECOND-ORDER MULTIPLE BALANCE METHOD FOR TIME-DEPENDENT {NEUTRON} TRANSPORT SIMULATIONS},
+	volume = {247},
+	doi = {10.1051/epjconf/202124703024},
+	language = {en},
+	journal = {EPJ Web of Conferences},
+	author = {Variansyah, Ilham and Larsen, Edward W. and Martin, William R.},
+	year = {2021},
+	pages = {03024},
+}
+
+%url = {https://doi.org/10.1080/00411459708017924},
+@article{adams_subcell_1997,
+	title = {Subcell balance methods for radiative transfer on arbitrary grids},
+	volume = {26},
+	issn = {0041-1450},
+	doi = {10.1080/00411459708017924},
+	number = {4-5},
+	urldate = {2024-04-18},
+	journal = {Transport Theory and Statistical Physics},
+	author = {Adams, Marvin L.},
+	month = jan,
+	year = {1997},
+	pages = {385--431},
+}
+
+@article{warsa_analytical_2002,
+	title = {Analytical \textit{{S}}{N} solutions in heterogeneous slabs using symbolic algebra computer programs},
+	volume = {29},
+	issn = {0306-4549},
+	url = {https://www.sciencedirect.com/science/article/pii/S0306454901000809},
+	doi = {10.1016/S0306-4549(01)00080-9},
+	number = {7},
+	urldate = {2024-04-18},
+	journal = {Annals of Nuclear Energy},
+	author = {Warsa, James. S.},
+	month = may,
+	year = {2002},
+	pages = {851--874},
+	file = {ScienceDirect Snapshot:/Users/jonesy/Zotero/storage/HYLCZIEA/S0306454901000809.html:text/html},
+}
+
+@techreport{ganapol_homogeneous_2001,
+	title = {Homogeneous {Infinite} {Media} {Time}-{Dependent} {Analytical} {Benchmarks}},
+	url = {https://www.osti.gov/biblio/975281},
+	language = {English},
+	number = {LA-UR-01-1854},
+	urldate = {2024-04-18},
+	institution = {Los Alamos National Laboratory (LANL), Los Alamos, NM (United States)},
+	author = {Ganapol, B. D. and Baker, R. S. and Dahl, J. A. and Alcouffe, Raymond E.},
+	month = jan,
+	year = {2001},
+	file = {Full Text PDF:/Users/jonesy/Zotero/storage/V9K37YIA/Ganapol et al. - 2001 - Homogeneous Infinite Media Time-Dependent Analytic.pdf:application/pdf},
+}
+
+@article{morgan_monte_2024,
+	title = {Monte {Carlo} / {Dynamic} {Code} ({MC}/{DC}): {An} accelerated {Python} package for fully transient neutron transport and rapid methods development},
+	volume = {9},
+	issn = {2475-9066},
+	shorttitle = {Monte {Carlo} / {Dynamic} {Code} ({MC}/{DC})},
+	url = {https://joss.theoj.org/papers/10.21105/joss.06415},
+	doi = {10.21105/joss.06415},
+	language = {en},
+	number = {96},
+	urldate = {2024-04-18},
+	journal = {Journal of Open Source Software},
+	author = {Morgan, Joanna Piper and Variansyah, Ilham and Pasmann, Samuel L. and Clements, Kayla B. and Cuneo, Braxton and Mote, Alexander and Goodman, Charles and Shaw, Caleb and Northrop, Jordan and Pankaj, Rohan and Lame, Ethan and Whewell, Benjamin and McClarren, Ryan G. and Palmer, Todd S. and Chen, Lizhong and Anistratov, Dmitriy Y. and Kelley, C. T. and Palmer, Camille J. and Niemeyer, Kyle E.},
+	month = apr,
+	year = {2024},
+	pages = {6415},
+	file = {Full Text PDF:/Users/jonesy/Zotero/storage/9L3XJDE4/Morgan et al. - 2024 - Monte Carlo  Dynamic Code (MCDC) An accelerated.pdf:application/pdf},
+}
+
+@article{jia_hou_oecdnea_2017,
+	title = {{OECD}/{NEA} benchmark for time-dependent neutron transport calculations without spatial homogenization},
+	volume = {317},
+	issn = {0029-5493},
+	url = {https://www.sciencedirect.com/science/article/pii/S0029549317300572},
+	doi = {10.1016/j.nucengdes.2017.02.008},
+	urldate = {2024-04-18},
+	journal = {Nuclear Engineering and Design},
+	author = {(Jia) Hou, Jason and Ivanov, Kostadin N. and Boyarinov, Victor F. and Fomichenko, Peter A.},
+	month = jun,
+	year = {2017},
+	keywords = {Kinetics parameters, Neutron transients, Space-time benchmark C5G7-TD},
+	pages = {177--189},
+	file = {ScienceDirect Snapshot:/Users/jonesy/Zotero/storage/LBJZ9UNA/S0029549317300572.html:text/html},
+}
+
+
+@article{KBA,
+    publisher = {Taylor & Francis},
+    title = {An SN Algorithm for Modern Architectures},
+    volume = {185},
     year = {2017},
-    doi = {https://doi.org/10.1007/978-3-319-12385-1}
+    pages = {107-116},
+    author = {Baker, Randal S.},
+    copyright = {Copyright American Nuclear Society},
+    issn = {0029-5639},
+    journal = {Nuclear science and engineering},
+    keywords = {discrete ordinates ; KBA method ; Neutron transport},
+    language = {eng},
+    number = {1},
 }
 
-@incollection{matthies,
-       author = {Hermann G. Matthies},
-        title = {Quantifying Uncertainty: Modern Computational Representation of Probability and Applications},
-    booktitle = {Extreme Man-Made and Natural Hazards in Dynamics of Structures},
-         year = {2007},
-       editor = {Adnan Ibrahimbegovic and Ivica Kozar},
-        pages = {105},
-          doi = {10.1007/978-1-4020-5656-7_4},
+@book{lewis1984computational,
+    title={Computational methods of neutron transport},
+    author={Lewis, Elmer Eugene and Miller, Warren F},
+    year={1984},
+    Address = {New York, NY, USA},
+    publisher={John Wiley and Sons, Inc.}
 }
 
-@book{inverse,
-    author = {W H Press and S A Teukolsky and W T Vetterling and B P Flannery},
-    title = {Numerical Recipes: The Art of Scientific Computing},
-    publisher = {Cambridge University Press},
-    address = {New York},
-    year = {2007},
-    edition = {3}
+
+@inproceedings{raffi2108pidotscom,
+    title = {ANALYSIS OF COMMUNICATION PERFORMANCE DEGRADATION OF THE RADIATION TRANSPORT CODE PIDOTS ON HIGH-UTILIZATION, MULTI-USER HPC SYSTEMS},
+    author = {Schunert, Sebastian and Garvey, Cormac T. and Yessayan, Raffi and Azmy, Yousry Y.},
+    address = {Cancun, Mexico},
+    booktitle = {PHYSOR: Physics of Reactors 2018},
+    publisher = {ANS},
+    doi = {},
+    url = {https://www.osti.gov/biblio/1478365}, 
+    number = {},
+    volume = {},
+    place = {United States},
+    year = {2018},
+    month = {4}
+} 
+
+@misc{zerr2020pidotsgithub,
+    author = {Joe Zerr},
+    title = {PIDOTS: Parallel Integral Discrete Ordinates Transport Solver},
+    year = {2020},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://github.com/lanl/pidots/tree/main}},
 }
 
-@book{pde,
-    author = {Walter Alexander Strauss},
-    title = {Partial Differential Equations: An Introduction},
-    publisher = {John Wiley \& Sons, Inc.},
-    year = {2007},
-    edition = {2}
+@inproceedings{morgan2023oci,
+    title = {Exploring One-Cell Inversion Method for Transient Transport on GPU},
+    author = {Joanna Piper Morgan and Ilham Variansyah and Todd S. Palmer and Kyle E. Niemeyer},
+    address = {Niagra Falls, CA},
+    booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    publisher = {CNS},
+    doi = {10.48550/arXiv:2305.13555},
+    url = {https://www.doi.org/10.48550/arXiv:2305.13555.}, 
+    number = {},
+    volume = {},
+    place = {United States},
+    year = {2023},
+    month = {8}
+} 
+
+@inproceedings{wolfe2022roofline,
+    author  = {Noah Wolfe and Xiaomin Lu},
+    title   = {Hierarchical Roofline on {AMD} {I}nstinct™ {MI}200 {GPU}s},
+    booktitle = {Oak Ridge Leadership Computing Facility Traning Seminar},
+    year    = {2022},
+    url = {https://www.olcf.ornl.gov/wp-content/uploads/AMD_Hierarchical_Roofline_ORNL_10-12-22.pdf},
+    place = {Oak Ridge, TN}
 }
 
-@techreport{wildey-presentation,
-    author = {Tim Wildey},
-    title = {Overview of Forward and Inverse Uncertainty Quantification Methods},
-    series = {BOUT++ Workshop},
-    publisher = {Sandia National Laboratories Center for Computing Research},
-    address = {Albuquerque NM},
-    year = {2018}
+
+@inproceedings{kunen_kripke_2015,
+    title = {KRIPKE - A MASSIVELY PARALLEL TRANSPORT MINI-APP},
+    url = {https://www.osti.gov/biblio/1229802},
+    language = {en},
+    booktitle = {American Nuclear Society Joint International Conference on Mathematics and Computation, Supercomputing in Nuclear Applications, and the Monte Carlo Method},
+    author = {Kunen, Adam J and Bailey, Teresa S and Brown, Peter N},
+    month = apr,
+    year = {2015},
 }
 
-@manual{mcnp,
-	title = {MCNP - A General Monte Carlo N-Particle Transport Code, Version 5},
-	organization = {Los Alamos National Laboratory},
-	volume = {1},
-	year = {2008}
+
+@inproceedings{tramm2021domain,
+    title = {Domain {Decomposed} {Random} {Ray} {Neutron} {Transport} on {GPU}-{Based} {Systems}},
+    booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering (M\&C 2021)},
+    doi = {10.13182/M&C21-33947},
+    author = {Tramm, John R and Siegel, Andrew R},
+    year = {2021},
 }
 
-@book{saltelli2004,
-    author = {A Saltelli and S Tarantola and F Campolongo and M Ratto},
-    title = {Sensitivity Analysis in Practice: A Guide to Assessing Scientific Models},
-    publisher = {John Wiley \& Sons, Inc.},
-    year = {2004}
+@inproceedings{tramm2022roofline,
+    author  = {JAEHYUK KWACK},
+    title   = {ROOFLINE PERFORMANCE ANALYSIS W/ INTEL ADVISOR ON INTEL CPUS \& GPUS},
+    booktitle = {2022 ECP ANNUAL MEETING},
+    year    = {2022},
+    url = {https://crd.lbl.gov/assets/Uploads/ECP22-Roofline-4-Intel-and-ALCF.pdf},
 }
 
-@article{saltelli2002,
-    author = {A Saltelli and S Tarantola},
-    title = {On the relative importance of input factors in mathematical models: safety assessment for nuclear waste disposal},
-    journal = {Journal of the American Statistical Association},
-    volume = {97},
-    year = {2002},
-    pages = {702--709},
+
+@book{lewis_computational_1984,
+	address = {New York, NY, USA},
+	title = {Computational methods of neutron transport},
+	publisher = {John Wiley and Sons, Inc.},
+	author = {Lewis, Elmer Eugene and Miller, Warren F},
+	year = {1984},
 }
 
-@article{saltelli2005,
-    author = {M Saisana and A Saltelli and S Tarantola},
-    title = {Uncertainty and sensitivity analysis techniques as tools for the quality assessment of composite indicators},
-    journal = {Journal of the Royal Statistical Society},
-    volume = {168},
-    number = {2},
+
+@book{duderstadt_hamilton,
+    address = {New York, NY, USA},
+	title = {Nuclear Reactor Analysis},
+	publisher = {John Wiley and Sons, Inc.},
+	author = {James Duderstadt and Louis Hamilton},
+	year = {1974},
+}
+
+% MMS Citations
+
+@article{wang_application_2018,
+    title = {The application of {Method} of {Manufactured} {Solutions} to method of characteristics in planar geometry},
+    volume = {121},
+    issn = {0306-4549},
+    url = {https://www.sciencedirect.com/science/article/pii/S0306454918304031},
+    doi = {10.1016/j.anucene.2018.07.041},
+    urldate = {2024-06-26},
+    journal = {Annals of Nuclear Energy},
+    author = {Wang, Jipu and Martin, William and Collins, Benjamin},
+    month = nov,
+    year = {2018},
+    keywords = {Flat source, Linear source, Method of Manufactured Solutions, MoC, Multiphysics, Order of accuracy},
+    pages = {295--304},
+}
+
+@inproceedings{gleicher_method_2012,
+    address = {Chicago, IL},
+    title = {The {Method} of {Manufactured} {Solutions} for {RattleSnake}, {A} {SN} {Radiation}  {Transport} {Solver} {Inside} the {MOOSE} {Framework}},
+    volume = {106},
+    booktitle = {Transactions of the {American} {Nuclear} {Society}},
+    publisher = {American Nucelar Society},
+    author = {Frederick N. {Gleicher II} AND Yaqi Wang AND Derek Gaston AND Richard Martineau},
+    month = jun,
+    year = {2012},
+}
+
+
+@article{roy_review_2005,
+    title = {Review of code and solution verification procedures for computational simulation},
+    volume = {205},
+    copyright = {https://www.elsevier.com/tdm/userlicense/1.0/},
+    issn = {00219991},
+    url = {https://linkinghub.elsevier.com/retrieve/pii/S0021999104004619},
+    doi = {10.1016/j.jcp.2004.10.036},
+    language = {en},
+    number = {1},
+    urldate = {2024-06-26},
+    journal = {Journal of Computational Physics},
+    author = {Roy, Christopher J.},
+    month = may,
     year = {2005},
-    pages = {307--323}
+    pages = {131--156},
 }
 
-@article{sobol,
-    author = {Sobol, I.},  
-    Journal = {Mathematical Modeling and Computational Experiment},
-    Title = {Sensitivity estimates for nonlinear mathematical models},
-    Year = {1993},
-    Pages = {407--414},
-    Volume = {1}
+
+@article{sympy,
+     title = {SymPy: symbolic computing in Python},
+     author = {Meurer, Aaron and Smith, Christopher P. and Paprocki, Mateusz and \v{C}ert\'{i}k, Ond\v{r}ej and Kirpichev, Sergey B. and Rocklin, Matthew and Kumar, AMiT and Ivanov, Sergiu and Moore, Jason K. and Singh, Sartaj and Rathnayake, Thilina and Vig, Sean and Granger, Brian E. and Muller, Richard P. and Bonazzi, Francesco and Gupta, Harsh and Vats, Shivam and Johansson, Fredrik and Pedregosa, Fabian and Curry, Matthew J. and Terrel, Andy R. and Rou\v{c}ka, \v{S}t\v{e}p\'{a}n and Saboo, Ashutosh and Fernando, Isuru and Kulal, Sumith and Cimrman, Robert and Scopatz, Anthony},
+     year = 2017,
+     month = jan,
+     keywords = {Python, Computer algebra system, Symbolics},
+     volume = 3,
+     pages = {e103},
+     journal = {PeerJ Computer Science},
+     issn = {2376-5992},
+     url = {https://doi.org/10.7717/peerj-cs.103},
+     doi = {10.7717/peerj-cs.103}
 }
 
-@book{Owen,
-   author = {Art B. Owen},
-   year = {2013},
-   title = {Monte Carlo theory, methods and examples}
+@inproceedings{brantley_new_2019,
+	address = {Portland, Oregon, USA},
+	title = {A {New} {Implicit} {Monte} {Carlo} {Thermal} {Photon} {Transport} {Capability} {Developed} {Using} {Shared} {Monte} {Carlo} {Infrastructure}},
+	booktitle = {Proceedings of the {American} {Nuclear} {Society}; {Mathematics} and {Computation} ({M}\&{C}) 2019},
+	author = {Brantley, P. and Gentile, N. and Lambert, M. and McKinley, M. and O’Brien, M. and Walsh, J.},
+	year = {2019},
 }
 
-@article{OlsonANSWinter,
-    author = {Aaron J Olson and Kayla Clements and James M Petticrew},
-    title = {A sampling-based approach to solve Sobol' indices using variance deconvolution for arbitrary uncertainty distributions},
-    journal = {Transactions of the American Nuclear Society},
-    volume = {127},
-    year = {2022},
-    number = {1},
-    pages = {450--453}
+%url = {http://ieeexplore.ieee.org/document/5725236/},
+@article{van_der_walt_numpy_2011,
+	title = {The {NumPy} {Array}: {A} {Structure} for {Efficient} {Numerical} {Computation}},
+	volume = {13},
+	issn = {1521-9615},
+	shorttitle = {The {NumPy} {Array}},
+	doi = {10.1109/MCSE.2011.37},
+	language = {en},
+	number = {2},
+	urldate = {2023-11-02},
+	journal = {Computing in Science \& Engineering},
+	author = {Van Der Walt, Stéfan and Colbert, S Chris and Varoquaux, Gaël},
+	month = mar,
+	year = {2011},
+	pages = {22--30},
+	file = {The_NumPy_Array_A_Structure_for_Efficient_Numerical_Computation.pdf:/Users/jonesy/Documents/PapersLibrary/The_NumPy_Array_A_Structure_for_Efficient_Numerical_Computation.pdf:application/pdf},
 }
 
-@article{OlsonANS2017,
-  author = {Aaron J Olson and Anil K Prinja and Brian C Franke},
-  title = {Error convergence characterization for Stochastic Transport Methods},
-  journal = {Transactions of the International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
-  volume = {116},
-  year = {2017},
-  number = {1},
-  pages = {536--539}
+@article{dalcin_mpi4py_2021,
+	title = {mpi4py: {Status} {Update} {After} 12 {Years} of {Development}},
+	volume = {23},
+	issn = {1521-9615, 1558-366X},
+	shorttitle = {mpi4py},
+	url = {https://ieeexplore.ieee.org/document/9439927/},
+	doi = {10.1109/MCSE.2021.3083216},
+	language = {en},
+	number = {4},
+	urldate = {2023-11-02},
+	journal = {Computing in Science \& Engineering},
+	author = {Dalcin, Lisandro and Fang, Yao-Lung L.},
+	month = jul,
+	year = {2021},
+	pages = {47--54},
+	file = {mpi4py_Status_Update_After_12_Years_of_Development.pdf:/Users/jonesy/Documents/PapersLibrary/mpi4py_Status_Update_After_12_Years_of_Development.pdf:application/pdf},
 }
 
-@incollection{Clements2021,
-	author = {Kayla Clements and Gianluca Geraci and Aaron J Olson},
-	title = {A variance deconvolution approach to sampling uncertainty quantification for Monte Carlo radiation transport solvers},
-	editor ={J. Darby Smith and Edgar Galvan},
-	booktitle = {Computer Science Research Institute Summer Proceedings 2021},
-	publisher = {The Computer Science Research Institute at Sandia National Laboratories},
-	number = {Technical Report SAND2022-0653R},
-	pages = {293--307},
-	note = {\url{https://cs.sandia.gov/summerproceedings/CCR2021.html}},
-	year = {2021}
+%url = {https://linkinghub.elsevier.com/retrieve/pii/S001046552100357X},
+@article{silvestri_sarkas_2022,
+	title = {Sarkas: {A} fast pure-python molecular dynamics suite for plasma physics},
+	volume = {272},
+	issn = {00104655},
+	shorttitle = {Sarkas},
+	doi = {10.1016/j.cpc.2021.108245},
+	language = {en},
+	urldate = {2023-11-02},
+	journal = {Computer Physics Communications},
+	author = {Silvestri, Luciano G. and Stanek, Lucas J. and Dharuman, Gautham and Choi, Yongjun and Murillo, Michael S.},
+	month = mar,
+	year = {2022},
+	pages = {108245},
+	file = {1-s2.0-S001046552100357X-main.pdf:/Users/jonesy/Documents/PapersLibrary/1-s2.0-S001046552100357X-main.pdf:application/pdf},
 }
 
-@article{GeraciANS2022,
-	author = {Gianluca Geraci and Aaron J Olson},
-	title = {Deconvolution strategies for efficient parametric variance estimation in stochastic media transport problems},
-	journal = {Transactions of the American Nuclear Society},
-	volume = {126},
-    year = {2022},
-    number = {1},
-    pages = {279--282}
+@article{mathias_cbmos_2022,
+	title = {{CBMOS}: a {GPU}-enabled {Python} framework for the numerical study of center-based models},
+	volume = {23},
+	issn = {1471-2105},
+	shorttitle = {{CBMOS}},
+	url = {https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-022-04575-4},
+	doi = {10.1186/s12859-022-04575-4},
+	language = {en},
+	number = {1},
+	urldate = {2023-11-03},
+	journal = {BMC Bioinformatics},
+	author = {Mathias, Sonja and Coulier, Adrien and Hellander, Andreas},
+	month = dec,
+	year = {2022},
+	pages = {55},
+	file = {s12859-022-04575-4.pdf:/Users/jonesy/Documents/PapersLibrary/s12859-022-04575-4.pdf:application/pdf},
 }
 
-@article{OlsonANS2019,
-	author = {Aaron J Olson},
-	title = {Calculation of parametric variance using variance deconvolution},
-	journal = {Transactions of the American Nuclear Society},
-    volume = {120},
-    year = {2019},
-    number = {1},
-	pages = {461--464}
+%url = {http://arxiv.org/abs/1312.1638},
+@article{witherden_pyfr_2014,
+	title = {{PyFR}: {An} {Open} {Source} {Framework} for {Solving} {Advection}-{Diffusion} {Type} {Problems} on {Streaming} {Architectures} using the {Flux} {Reconstruction} {Approach}},
+	volume = {185},
+	issn = {00104655},
+	shorttitle = {{PyFR}},
+	doi = {10.1016/j.cpc.2014.07.011},
+	language = {en},
+	number = {11},
+	urldate = {2023-11-03},
+	journal = {Computer Physics Communications},
+	author = {Witherden, Freddie D. and Farrington, Antony M. and Vincent, Peter E.},
+	month = nov,
+	year = {2014},
+	keywords = {65M60 65M70, Mathematics - Numerical Analysis, Physics - Computational Physics},
+	pages = {3028--3040},
+	file = {PyFR.pdf:/Users/jonesy/Documents/PapersLibrary/PyFR.pdf:application/pdf},
 }
 
-@article{ClementsANS2022,
-	author = {Kayla Clements and Gianluca Geraci and Aaron J Olson},
-	title = {Numerical investigation on the performance of a variance deconvolution estimator},
-	journal = {Transactions of the American Nuclear Society},
-    volume = {126},
-    year = {2022},
-    number = {1},
-	pages = {344--347}
+
+%url = {https://dl.acm.org/doi/10.1145/2833157.2833162},
+@inproceedings{lam_numba_2015,
+	address = {Austin Texas},
+	title = {Numba: a {LLVM}-based {Python} {JIT} compiler},
+	isbn = {978-1-4503-4005-2},
+	shorttitle = {Numba},
+	doi = {10.1145/2833157.2833162},
+	language = {en},
+	urldate = {2023-11-03},
+	booktitle = {Proceedings of the {Second} {Workshop} on the {LLVM} {Compiler} {Infrastructure} in {HPC}},
+	publisher = {ACM},
+	author = {Lam, Siu Kwan and Pitrou, Antoine and Seibert, Stanley},
+	month = nov,
+	year = {2015},
+	pages = {1--6},
+	file = {numba.pdf:/Users/jonesy/Documents/PapersLibrary/numba.pdf:application/pdf},
 }
 
-@unpublished{GeraciMC2023,
-    author = {Gianluca Geraci and Kayla Clements and Aaron Olson},
-    title = {On polynomial chaos for Monte Carlo transport applications},
-    note = {Extended abstract submitted for consideration to ANS M\&C 2023},
+@article{hafner_fast_2021,
+	title = {Fast, {Cheap}, and {Turbulent}—{Global} {Ocean} {Modeling} {With} {GPU} {Acceleration} in {Python}},
+	volume = {13},
+	issn = {1942-2466, 1942-2466},
+	url = {https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021MS002717},
+	doi = {10.1029/2021MS002717},
+	language = {en},
+	number = {12},
+	urldate = {2023-11-03},
+	journal = {Journal of Advances in Modeling Earth Systems},
+	author = {Häfner, Dion and Nuterman, Roman and Jochum, Markus},
+	month = dec,
+	year = {2021},
+	pages = {e2021MS002717},
+	file = {J Adv Model Earth Syst - 2021 - H fner - Fast Cheap and Turbulent Global Ocean Modeling With GPU Acceleration in Python.pdf:/Users/jonesy/Documents/PapersLibrary/J Adv Model Earth Syst - 2021 - H fner - Fast Cheap and Turbulent Global Ocean Modeling With GPU Acceleration in Python.pdf:application/pdf},
+}
+
+@article{pasmann_iqmc_nodate,
+	title = {Mitigating Spatial Error in the Iterative Quasi–{M}onte {C}arlo ({iQMC}) Method for Neutron Transport Simulations with Linear Discontinuous Source Tilting and Effective Scattering and Fission Rate Tallies},
+	language = {en},
+	author = {Pasmann, S and Variansyah, I and Kelley, C T and McClarren, R G},
+    journal = {Nuclear Science and Engineering},
+    year = {2023},
+    doi = {10.1080/00295639.2024.2332007},
+	file = {FinalPaper_168_0710025245_sam.pdf:/Users/jonesy/Documents/PapersLibrary/FinalPaper_168_0710025245_sam.pdf:application/pdf},
+}
+
+%url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454919300167},
+@article{hamilton_continuous-energy_2019,
+	title = {Continuous-energy {Monte} {Carlo} neutron transport on {GPUs} in the {Shift} code},
+	volume = {128},
+	issn = {03064549},
+	doi = {10.1016/j.anucene.2019.01.012},
+	language = {en},
+	urldate = {2023-11-03},
+	journal = {Annals of Nuclear Energy},
+	author = {Hamilton, Steven P. and Evans, Thomas M.},
+	month = jun,
+	year = {2019},
+	pages = {236--247},
+	file = {1-s2.0-S0306454919300167-am.pdf:/Users/jonesy/Documents/PapersLibrary/1-s2.0-S0306454919300167-am.pdf:application/pdf},
+}
+
+@article{warris_pypaswas_2018,
+	title = {{pyPaSWAS}: {Python}-based multi-core {CPU} and {GPU} sequence alignment},
+	volume = {13},
+	issn = {1932-6203},
+	shorttitle = {{pyPaSWAS}},
+	url = {https://dx.plos.org/10.1371/journal.pone.0190279},
+	doi = {10.1371/journal.pone.0190279},
+	language = {en},
+	number = {1},
+	urldate = {2023-11-03},
+	journal = {PLOS ONE},
+	author = {Warris, Sven and Timal, N. Roshan N. and Kempenaar, Marcel and Poortinga, Arne M. and Van De Geest, Henri and Varbanescu, Ana L. and Nap, Jan-Peter},
+	editor = {De Brevern, Alexandre G.},
+	month = jan,
+	year = {2018},
+	pages = {e0190279},
+	file = {document.pdf:/Users/jonesy/Documents/PapersLibrary/document.pdf:application/pdf},
+}
+
+@article{larsen_international_2011,
+	title = {International {Conference} on {Mathematics} and {Computational} {Methods} {Applied} to {Nuclear} {Science} and {Engineering} ({MC} 2011)},
+	volume = {40},
+	issn = {0041-1450, 1532-2424},
+	url = {http://www.tandfonline.com/doi/abs/10.1080/00411450.2011.610205},
+	doi = {10.1080/00411450.2011.610205},
+	language = {en},
+	number = {4},
+	urldate = {2023-11-04},
+	journal = {Transport Theory and Statistical Physics},
+	author = {Larsen, Edward W.},
+	month = oct,
+	year = {2011},
+	pages = {225--242},
+}
+
+@techreport{MCNP_RisingArmstrongEtAl,
+    address = {Los Alamos, NM, USA},
+    doi = {10.2172/1909545},
+    institution = {Los Alamos National Laboratory},
+    month = {January},
+    number = {LA-UR-22-33103, Rev.~1},
+    title = {{MCNP\textsuperscript{\textregistered} Code Version 6.3.0 Release Notes}},
+    url = {https://www.osti.gov/biblio/1909545},
     year = {2023}
 }
 
-@misc{mcdc,
-    author = {Ilham Variansyah},
-    title = {{MC/DC}: {Monte} {Carlo} {Dynamic} Code},
-    howpublished = {\url{https://github.com/CEMeNT-PSAAP/MCDC}},
-    year = {2022--ongoing}
+@book{bickel2009monte,
+   author = {P Bickel and P Diggle and S Feinberg and U Gather and I Olkin and S Zeger},
+   publisher = {Springer},
+   title = {{Monte Carlo} and Quasi-{Monte Carlo} Sampling},
+   url = {http://www.springer.com/series/692},
+   year = {2009}
 }
 
-@book{Larsen-statistics,
-    author = {Richard Larsen and Morris L. Marx},
-    title = {An Introduction to Mathematical Statistics and Its Applications},
-    edition = {5},
-    publisher = {Pearson Education},
-    address = {Boston: Prentice Hall},
-    year = {2012}
+@article{leppanen_performance_2010,
+	title = {Performance of {Woodcock} delta-tracking in lattice physics applications using the {Serpent} {Monte} {Carlo} reactor physics burnup calculation code},
+	volume = {37},
+	issn = {0306-4549},
+	url = {https://www.sciencedirect.com/science/article/pii/S0306454910000320},
+	doi = {https://doi.org/10.1016/j.anucene.2010.01.011},
+	number = {5},
+	journal = {Annals of Nuclear Energy},
+	author = {Leppänen, Jaakko},
+	year = {2010},
+	pages = {715--722},
 }
 
-@book{Weiss-prob,
-    author = {Neil A. Weiss},
-    title = {A Course In Probability},
-    publisher = {Addison-Wesley},
-    year = {2005}
+@article{pyfrPetascale,
+  author={Witherden, Freddie D.},
+  journal={Computing in Science \& Engineering}, 
+  title={Python at Petascale With PyFR or: How I Learned to Stop Worrying and Love the Snake}, 
+  year={2021},
+  volume={23},
+  number={4},
+  pages={29-37},
+  doi={10.1109/MCSE.2021.3080126}
 }
 
-@article{Cho,
-    author = {Eungchun Cho and Moon Jung Cho},
-    title = {Variance of Sample Variance},
-    journal = {Proceedings of the Survey Research Methods Section},
-    year = {2008},
-    volume = {},
-    pages = {1291--1293}
+@software{jax2018github,
+  author = {James Bradbury and Roy Frostig and Peter Hawkins and Matthew James Johnson and Chris Leary and Dougal Maclaurin and George Necula and Adam Paszke and Jake Vander{P}las and Skye Wanderman-{M}ilne and Qiao Zhang},
+  title = {{JAX}: composable transformations of {P}ython+{N}um{P}y programs},
+  url = {http://github.com/google/jax},
+  version = {0.3.13},
+  year = {2018},
 }
 
-@techreport{dakota,
-    author = {Brian M. Adams and others},
-    title = {Dakota, A Multilevel Parallel Object-Oriented Framework for
-    Design Optimization, Parameter Estimation, Uncertainty
-    Quantification, and Sensitivity Analysis: Version 6.15 User's Manual},
-    publisher = {Sandia National Laboratories},
-    address = {Albuquerque NM},
-    year = {2021},
-    number = {SAND2021-14253},
-    howpublished = {\url{https://dakota.sandia.gov//sites/default/files/docs/6.15/Users-6.15.0.pdf}}
+@book{gpuProgramingText,
+    author = {David B. Kirk and Wen-mei W. Hwu},
+    isbn = {978-0-12-811986-0},
+    title = {Programing Massively Parallel Processors},
+    edition = {Third},
+    publisher = {Elsevier},
+    year = {2017}
 }
 
-@article{MCMC-paper,
-    author = {Eungchun Cho and Moon Jung Cho},
-    title = {Variance of Sample Variance},
-    journal = {Proceedings of the Survey Research Methods Section},
-    year = {2008},
-    volume = {},
-    pages = {1291--1293}
+@book{lewis1984computational,
+    title={Computational methods of neutron transport},
+    author={Lewis, Elmer Eugene and Miller, Warren F},
+    year={1984},
+    Address = {New York, NY, USA},
+    publisher={John Wiley and Sons, Inc.}
 }
 
-@misc{quartz,
-    author = {Lawrence Livermore National Laboratory Computing},
-    title = {Quartz computing platform}
+@phdthesis{hamilton2011numerical,
+  title={Numerical Solution of the k-Eigenvalue Problem},
+  author={Hamilton, Steven Paul},
+  year={2011},
+  school={Emory University}
 }
 
-@misc{psaap-presentation,
-    title = {SMR Challenge Problem: Definition and progress on our demonstration problem},
-    author = {Ryan McClarren},
-    month = {October},
+@article{kokkos,
+  author={Trott, Christian R. and Lebrun-Grandié, Damien and Arndt, Daniel and Ciesko, Jan and Dang, Vinh and Ellingwood, Nathan and Gayatri, Rahulkumar and Harvey, Evan and Hollman, Daisy S. and Ibanez, Dan and Liber, Nevin and Madsen, Jonathan and Miles, Jeff and Poliakoff, David and Powell, Amy and Rajamanickam, Sivasankaran and Simberg, Mikael and Sunderland, Dan and Turcksin, Bruno and Wilke, Jeremiah},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  title={Kokkos 3: Programming Model Extensions for the Exascale Era},
+  year={2022},
+  volume={33},
+  number={4},
+  pages={805-817},
+  doi={10.1109/TPDS.2021.3097283}}
+
+@inproceedings{raja,
+    author = {D. A. Beckingsale and J. Burmark and R. Hornung and H. Jones and W. Killian and A. J. Kunen and O. Pearce and P. Robinson and B. S. Ryujin and T. R. W. Scogland},
+    title = {RAJA: Portable Performance for Large-Scale Scientific Applications},
+    booktitle = {2019 IEEE/ACM International Workshop on Performance, Portability and Productivity in HPC (P3HPC)},
+    year = 2019
+}
+
+@inproceedings{AlAwarETAL21PyKokkos,
+  author = {Al Awar, Nader and Zhu, Steven and Biros, George and Gligoric, Milos},
+  title = {A Performance Portability Framework for Python},
+  booktitle = {International Conference on Supercomputing},
+  pages = {467-478},
+  year = {2021},
+}
+
+%url = {https://doi.org/10.13182/T126-38137},
+@inproceedings{morgan2022,
+    Address = {Anaheim, CA, USA},
+    Author = {Joanna Piper Morgan and Todd Stephen Palmer and Kyle Evan Niemeyer},
+    Booktitle = {Transactions of the American Nuclear Society},
+    Date = {August 2022},
+    Year = {2022},
+    Pages = {318-320},
+    Title = {Explorations of Python-Based Automatic Hardware Code Generation for Neutron Transport Applications},
+    Volume = {126},
+    doi = {10.13182/T126-38137},
+}
+
+@book{lewis_computational_1984,
+	address = {New York, NY, USA},
+	title = {Computational methods of neutron transport},
+	publisher = {John Wiley and Sons, Inc.},
+	author = {Lewis, Elmer Eugene and Miller, Warren F},
+	year = {1984},
+}
+
+@article{mpi4py_2021,
+	title = {mpi4py: {Status} {Update} {After} 12 {Years} of {Development}},
+	volume = {23},
+	issn = {1521-9615, 1558-366X},
+	shorttitle = {mpi4py},
+	url = {https://ieeexplore.ieee.org/document/9439927/},
+	doi = {10.1109/MCSE.2021.3083216},
+	language = {en},
+	number = {4},
+	urldate = {2023-11-02},
+	journal = {Computing in Science \& Engineering},
+	author = {Dalcin, Lisandro and Fang, Yao-Lung L.},
+	month = jul,
+	year = {2021},
+	pages = {47--54},
+	file = {mpi4py_Status_Update_After_12_Years_of_Development.pdf:/Users/jonesy/Documents/PapersLibrary/mpi4py_Status_Update_After_12_Years_of_Development.pdf:application/pdf},
+}
+
+@article{mcdc:qmc,
+    title="A Quasi-{M}onte {C}arlo Method with {K}rylov Linear Solvers for Multigroup Neutron Transport Simulations",
+    author="S. Pasmann and I. Variansyah and C. T. Kelley and R. McClarren",
+    journal="Nuclear Science and Engineering",
+    doi="10.1080/00295639.2022.2143704",
+    note="Published online Jan 12, 2023",
+    year = {2023}
+}
+
+@inproceedings{mcdc:clements_mc23,
+    Booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    title = {Global Sensitivity Analysis in {M}onte {C}arlo Radiation Transport},
+    Month = {8},
+    year = {2023},
+    author = {Kayla Clements and Gianluca Geraci and Aaron J Olson and Todd Palmer},
+    address = {Niagara Falls, Ontario, Canada},
+}
+
+
+@inproceedings{mcdc:qmcabs,
+    booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    title="{iQMC}: Iterative Quasi-{Monte Carlo} with {K}rylov Linear Solvers for k-Eigenvalue Neutron Transport Simulations",
+    author="S. Pasmann and I. Variansyah and C. T. Kelley and R. McClarren",
+    year=2023,
+    address = {Niagara Falls, Ontario, Canada},
+}
+
+@inproceedings{mcdc:variansyah_physor22_pct,
+    Booktitle = {International Conference on Physics of Reactors},
+    title = {Performance of Population Control Techniques in {M}onte {C}arlo Reactor Criticality Simulation},
     year = {2022},
-    howpublished = {CEMeNT presentation to PSAAP review team.}
+    author = {Ilham Variansyah and Ryan G. McClarren},
+    address = {Pittsburgh, Pennsylvania, USA},
+}
+
+@inproceedings{variansyah_mc23_ic,
+    Booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    title = {An effective initial particle sampling technique for {M}onte {C}arlo reactor transient simulations},
+    year = {2023},
+    author = {Ilham Variansyah and Ryan G. McClarren},
+    address = {Niagara Falls, Ontario, Canada},
+    doi = {10.48550/arXiv.2305.07646}
+}
+
+@inproceedings{variansyah_mc23_moving_object,
+    Booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    title = {High-fidelity treatment for object movement in time-dependent {M}onte {C}arlo transport simulations},
+    year = {2023},
+    author = {Ilham Variansyah and Ryan G. McClarren},
+    address = {Niagara Falls, Ontario, Canada},
+    doi = {10.48550/arXiv.2305.07641}
+}
+
+@article{mcdc:variansyah_nse22_pct,
+    author  = {Ilham Variansyah and Ryan G McClarren}, 
+    title   = {Analysis of Population Control Techniques for Time-Dependent and Eigenvalue {M}onte {C}arlo Neutron Transport Calculations},
+    journal = {Nuclear Science and Engineering},
+    volume  = {196:11},
+    pages   = {1280--1305},
+    year    = {2022},
+    doi     = {10.1080/00295639.2022.2091906}
+}
+
+% url = {https://www.sciencedirect.com/science/article/pii/S0022407324000657},
+@article{mcdc:clements_variance_2024,
+	title = {A variance deconvolution estimator for efficient uncertainty quantification in {Monte} {Carlo} radiation transport applications},
+	volume = {319},
+	issn = {0022-4073},
+	doi = {https://doi.org/10.1016/j.jqsrt.2024.108958},
+	journal = {Journal of Quantitative Spectroscopy and Radiative Transfer},
+	author = {Clements, Kayla B. and Geraci, Gianluca and Olson, Aaron J. and Palmer, Todd S.},
+	year = {2024},
+	keywords = {Monte Carlo radiation transport, Stochastic solvers, Uncertainty quantification},
+	pages = {108958},
+}
+
+@inproceedings{variansyah_mc23_mcdc,
+    Booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    title = {Development of {MC/DC}: a performant, scalable, and portable {P}ython-based {M}onte {C}arlo neutron transport code},
+    year = {2023},
+    author = {Ilham Variansyah and Joanna Piper Morgan and Jordan Northrop and Kyle E. Niemeyer and Ryan G. McClarren},
+    address = {Niagara Falls, Ontario, Canada},
+    doi = {10.48550/arXiv.2305.07636}
+}
+
+@article{brax2023,
+    author = {Cuneo, Braxton and Bailey, Mike},
+    title = {Divergence Reduction in {M}onte {C}arlo Neutron Transport with On-{GPU} Asynchronous Scheduling},
+    year = {2023},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    issn = {1049-3301},
+    url = {10.1145/3626957},
+    doi = {10.1145/3626957},
+    note = {Just Accepted},
+    journal = {ACM Trans. Model. Comput. Simul.},
+    month = {oct},
+    keywords = {asynchronous, divergence, scheduling, GPGPU, GPU}
+}
+
+
+@inproceedings{pozulp_progress_2023,
+	address = {Niagara Falls, Ontario, Canada},
+	title = {Progress {Porting} {LLNL} {Monte} {Carlo} {Transport} {Codes} to {Nvidia} {GPUs}},
+	booktitle = {International {Conference} on {Mathematics} and {Computational} {Methods} {Applied} to {Nuclear} {Science} and {Engineering}},
+	author = {Pozulp, M. and Bleile, R. and Brantley, P. and Dawson, S. and McKinley, M. and M. O’Brien, A. Robinsonand M. Yang},
+	year = {2023},
+}
+
+
+@techreport{brantley_llnl_2016,
+	title = {{LLNL} {Mercury} {Project} {Trinity} {Open} {Science} {Final} {Report}},
+	url = {https://www.osti.gov/biblio/1252640},
+	institution = {Lawrence Livermore National Lab},
+	author = {Brantley, Patrick and Dawson, Shawn and McKinley, Scott and O'Brien, Matt and Peters, Doug and Pozulp, Mike and Becker, Greg and Mohror, Kathryn and Moody, Adam},
+	month = apr,
+	year = {2016},
+	doi = {10.2172/1252640},
+}
+
+%url = {https://www.sciencedirect.com/science/article/pii/S030645491400379X},
+@article{romano_openmc_nodate,
+    title = {{OpenMC}: {A} state-of-the-art {Monte} {Carlo} code for research and development},
+	volume = {82},
+	issn = {0306-4549},
+	doi = {10.1016/j.anucene.2014.07.048},
+	journal = {Annals of Nuclear Energy},
+	author = {Romano, Paul K. and Horelik, Nicholas E. and Herman, Bryan R. and Nelson, Adam G. and Forget, Benoit and Smith, Kord},
+	year = {2015},
+	keywords = {HDF5, Monte Carlo, Neutron transport, OpenMC, Parallel, XML},
+	pages = {90--97},
+	annote = {Joint International Conference on Supercomputing in Nuclear Applications and Monte Carlo 2013, SNA + MC 2013. Pluri- and Trans-disciplinarity, Towards New Modeling and Numerical Simulation Paradigms},
+}
+
+
+@article{mcsummit,
+    author = {J. P. Morgan and A. Mote and S. Pasmann and G. Ridley and T. S. Palmer and K. E. Niemeyer and R. G. McClarren},
+    title = {The {Monte} {Carlo} Computational Summit – {O}ctober 25 \& 26, 2023 – {N}otre {D}ame, {I}ndiana, {USA}},
+    journal = {Journal of Computational and Theoretical Transport},
+    year = 2024,
+
+    doi = {10.48550/arXiv.2402.08161}
+}
+
+@article{Kobayashi2001,
+    issue = {2},
+    journal = {Progress in Nuclear Energy},
+    pages = {119-144},
+    author = {Kobayashi, Keisuke and Sugimura, Naoki and Nagaya, Yasunobu},
+    title = {3D radiation transport benchmark problems and results for simple geometries with void region},
+    volume = {39},
+    year = {2001},
+}
+
+@conference{Ganapol2001HomogeneousBenchmarks,
+    Booktitle = {International Meeting on Mathematical Methods for Nuclear Applications},
+    title = {Homogeneous Infinite Media Time-Dependent Analytical Benchmarks},
+    Month = {9},
+    year = {2001},
+    author = {Ganapol, B.D. and Baker, R.S. and Dahl, J.A. and Alcouffe, Raymond E.},
+    address = {Salt Lake City, UT},
+    Volume = {41(25)}
+}
+
+@article{mcdc_joss_2024,
+    author = {Joanna Piper Morgan and Ilham Variansyah and Samuel Pasmann and Kayla Beth Clements and Braxton Cuneo and Alexander Mote and Charles Goodman and Caleb Shaw and Jordan Northrop and Rohan Pankaj and Ethan Lame and Benjamin Whewell and Ryan McClarren and Todd Palmer and Lizhong Chen and Dmitriy Anistratov and C. T. Kelley and Camille Palmer and Kyle E. Niemeyer},
+    title = {{M}onte {C}arlo / {D}ynamic {C}ode ({MC/DC}): An accelerated {P}ython package for fully transient neutron transport and rapid methods development},
+    doi = {10.21105/joss.06415},
+    journal = {Journal of Open Source Software},
+    year = {2024},
+    volume = {95},
+    issue = {6},
+    pages = {6415},
+}
+
+@article{kloeckner_pycuda_2012,
+   author = {{Kl{\"o}ckner}, Andreas
+        and {Pinto}, Nicolas
+        and {Lee}, Yunsup
+        and {Catanzaro}, B.
+        and {Ivanov}, Paul
+        and {Fasih}, Ahmed },
+   title = "{PyCUDA and PyOpenCL: A Scripting-Based Approach to GPU Run-Time Code Generation}",
+   journal = "Parallel Computing",
+   volume = "38",
+   number = "3",
+   pages = "157--174",
+   year = "2012",
+   issn = "0167-8191",
+   doi = "10.1016/j.parco.2011.09.001",
+}
+
+@article {cython2011,
+    author = {L. Dalcin and R. Bradshaw and K. Smith and C. Citro and S. Behnel and D. Seljebotn},
+    journal = {Computing in Science \& Engineering},
+    title = {Cython: The Best of Both Worlds},
+    year = {2011},
+    volume = {13},
+    number = {02},
+    issn = {1558-366X},
+    pages = {31-39},
+    abstract = {Cython is a Python language extension that allows explicit type declarations and is compiled directly to C. As such, it addresses Python&#x27;s large overhead for numerical loops and the difficulty of efficiently using existing C and Fortran code, which Cython can interact with natively.},
+    keywords = {python;cython;numerics;scientific computing},
+    doi = {10.1109/MCSE.2010.118},
+    publisher = {IEEE Computer Society},
+    address = {Los Alamitos, CA, USA},
+    month = {mar}
+}
+
+@inproceedings{PyFR1p,
+    title = {{PyFR: Heterogeneous Computing on Mixed Unstructured Grids with Python}},
+    year = {2015},
+    booktitle = {EuroSciPy},
+    author = {Witherden, F. D. and Klemm, M and Vincent, P},
+    url = {https://www.youtube.com/watch?v=wdR1X3Ei0eY},
+    address = {Cambridge}
+}
+
+
+% url          = "http://learningsys.org/nips17/assets/papers/paper_16.pdf"
+@inproceedings{cupy_learningsys2017,
+  author       = "Okuta, Ryosuke and Unno, Yuya and Nishino, Daisuke and Hido, Shohei and Loomis, Crissman",
+  title        = "{CuPy}: A {N}um{P}y-Compatible Library for {NVIDIA} {GPU} Calculations",
+  booktitle    = "Proceedings of Workshop on Machine Learning Systems (LearningSys) in The Thirty-first Annual Conference on Neural Information Processing Systems (NIPS)",
+  year         = "2017",
+}
+
+@ARTICLE{2020SciPy-NMeth,
+  author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and
+            Haberland, Matt and Reddy, Tyler and Cournapeau, David and
+            Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and
+            Bright, Jonathan and {van der Walt}, St{\'e}fan J. and
+            Brett, Matthew and Wilson, Joshua and Millman, K. Jarrod and
+            Mayorov, Nikolay and Nelson, Andrew R. J. and Jones, Eric and
+            Kern, Robert and Larson, Eric and Carey, C J and
+            Polat, {\.I}lhan and Feng, Yu and Moore, Eric W. and
+            {VanderPlas}, Jake and Laxalde, Denis and Perktold, Josef and
+            Cimrman, Robert and Henriksen, Ian and Quintero, E. A. and
+            Harris, Charles R. and Archibald, Anne M. and
+            Ribeiro, Ant{\^o}nio H. and Pedregosa, Fabian and
+            {van Mulbregt}, Paul and {SciPy 1.0 Contributors}},
+  title   = {{{SciPy} 1.0: Fundamental Algorithms for Scientific
+            Computing in Python}},
+  journal = {Nature Methods},
+  year    = {2020},
+  volume  = {17},
+  pages   = {261--272},
+  adsurl  = {https://rdcu.be/b08Wh},
+  doi     = {10.1038/s41592-019-0686-2},
+}
+
+@inproceedings{var_mcdc_2023,
+    Booktitle = {International Conference on Mathematics and Computational Methods Applied to Nuclear Science and Engineering},
+    title = {Development of {MC/DC}: a performant, scalable, and portable Python-based {M}onte {C}arlo neutron transport code},
+    year = {2023},
+    author = {Ilham Variansyah and Joanna Piper Morgan and Kyle E. Niemeyer and Ryan G. McClarren},
+    address = {Niagara Falls, Ontario, Canada},
+    doi={10.48550/arXiv.2305.07636},
+}
+
+@inproceedings{Godoy_2023,
+   title={Evaluating performance and portability of high-level programming models: Julia, Python/Numba, and Kokkos on exascale nodes},
+   DOI={10.1109/ipdpsw59300.2023.00068},
+   booktitle={2023 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW)},
+   publisher={IEEE},
+   author={Godoy, William F. and Valero-Lara, Pedro and Dettling, T. Elise and Trefftz, Christian and Jorquera, Ian and Sheehy, Thomas and Miller, Ross G. and Gonzalez-Tallada, Marc and Vetter, Jeffrey S. and Churavy, Valentin},
+   year={2023},
+   month=may 
+}
+
+@inproceedings{cuneo2024,
+    title={An Alternative to Stride-Based {RNG} for {M}onte {C}arlo Transport}, 
+    booktitle = {Transactions of the American Nuclear Society},
+    author={Braxton S. Cuneo and Ilham Variansyah},
+    year={2024},
 }
