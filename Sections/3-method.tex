@@ -11,7 +11,7 @@ For deterministic methods appendix \ref{app:therefore} contains:
     \item expanded derivations of the higher order space-time-energy discretization scheme;
     \item derivation of fourier analysis of the discretization scheme;
     \item derivation of the method of manufactured solution; and
-    \item description of the implementation in code
+    \item description of the implementation in code 
 \end{itemize}
 The remainder of this section will be devoted to describing the current state of the investigations into an acceleration scheme for OCI in the thin limit (see \ref{ssec:method_acc}).
 
@@ -62,7 +62,7 @@ This defines system defines angular flux on a stencil shown in figure \ref{fig:s
 
 In the traditional source iteration, the scattering source is presumed known from a previous iteration, which leads to the following set of equations to be solved in transport ``sweeps''.
 This means that new estimates of both the end of time-step value of angular flux and time-averaged angular flux are computed together in each cell. 
-So a $4\times4$ sized system (from stincle values) of equations must be solved to go from cell to cell in each angle.
+So a $4\times4$ sized system (from stencil values) of equations must be solved to go from cell to cell in each angle.
 This process is annoyingly serial over space, but embarrassingly parallel over angles.
 The whole system sparse matrix is block (in each ordinate) lower triangular (over all cells).
 Source iterations couple angles together in the iterative method by use of the scalar flux term.
@@ -76,7 +76,6 @@ For SCB in slab geometry, this means there is a local $4NG \times 4NG$ matrix to
 
 To ensure that our combination of higher-order discretization schemes is still unconditionally stable, we performed a Fourier analysis to find the slowest-converging mode of the method.
 Assuming no scattering, no sources, mono-energetic problem, and make physical assumptions (only constant positive values of $\Delta x$, $\Delta t$, $\Sigma$, and $v$) we derived SCB-MB's eigenfunction and numerically solve it. 
-We start by defining our Fourier ansätze as,
 % \begin{subequations}
 % \begin{align}
 %     \psi_{k+1/2,j,L} &= \theta^{k+1}a e^{i\omega j}
@@ -96,27 +95,29 @@ We start by defining our Fourier ansätze as,
 % \end{subequations}
 % where $k$ is the mode number, $i$ is the imaginary number, $\omega$ is the frequency of the mode, $\theta$ is the , and $j$ is the specific cell.
 % Substituting our ansätze into Eqs.~\eqref{eq:scb-mb-a}, \eqref{eq:scb-mb-b}, \eqref{eq:scb-mb-c}, and \eqref{eq:scb-mb-d}, respectively, we
-% When this system is solved for its eigenvalues ($\Lambda$) numerically it shows that a MB-SCB scheme is unconditionally stable over $\mu \in [-1, 1]$. 
+% When this system is solved for its eigenvalues ($\Lambda$) numerically it shows that a MB-SCB scheme is unconditionally stable over $\mu \in [-1, 1]$.  
 
 \subsection{Verification using method of manufactured solution}
 
 Finding benchmark problems that simulate transient, energy dependent, single dimension solutions to the neutron transport equation is difficult.
-I used the Method of Manufactured solutions to derive my own benchmark \citep{roy_review_2005}.
-It is wildly accepted in the felid \cite{nse_mms_warsaw} and has previously been used to verify other deterministic neutron transport codes including the production code solver MOOSE \citep{wang_application_2018,moosemms}.
+I used the Method of Manufactured solutions to derive my own benchmark .
+It is wildly accepted in the felid  and has previously been used to verify other deterministic neutron transport codes including the production code solver MOOSE.
+  
+% \cite{nse_mms_warsaw} \citep{wang_application_2018,moosemms} \citep{roy_review_2005}
 
 The method of manufactured solutions follow a backward solving technique where a solution is made-up---expressing any desired behavior (e.g. smoothness, differentiability, positivity, etc.)---then inserted into the governing equation and solved for the source term.
-The manufactured source source is supplied to the solver to verify that it converges to the correct solution at the expected rate.
-To derive our method of manufactured solution we start with a conditions functional representation of the angular flux in angle, energy, space and time
+The manufactured source source is supplied to the solver to verify that it converges to the correct solution at the expected rate. 
+To derive our method of manufactured solution we start with a conditions functional representation of the angular flux in angle, energy, space and time 
 \begin{subequations}
-    \label{eq:manufactured_sol}
+    \label{eq:manufactured_sol}  
     \begin{align}
         \psi_1(x,t,\mu) = (1-\mu^2)\sin(\pi x)e^{-t} \label{eq:af_mms_cont1}\\
         \psi_2(x,t,\mu) = (1-\mu^2)(-x^4 + x + 1)e^{-t/2} \label{eq:af_mms_cont2}
     \end{align}
-\end{subequations}
+\end{subequations} 
 These equations can now be inserted into the NTE (eq \ref{eq:sn_nte}) and solved for a continuous functional representation of Q.
 From there the source equations are placed on the stencil by averaging (via numerical integration) in space and time where nessacary (see \ref{fig:stencil}).
-This discretized set of sources is then supplied to the solver.
+This discretized set of sources is then supplied to the solver and the converged angular flux it provides is then compared to the original manufactured source (again placed on the stencil).
 %The range we will be solving these equations is $x \in [0,1]$, $t \in [0,5]$ and $\mu \in [-1,1]$.
 %Now we take \ref{eq:af_mms_cont1} and \ref{eq:af_mms_cont2} and insert them into the $S_N$ slab wall neutron transport equation defined in Eqn. \ref{eq:sn_nte} 
 %\begin{subequations}
