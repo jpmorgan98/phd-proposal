@@ -2,30 +2,59 @@
 \label{ch:objectives}
 
 \section{GPU enabled time dependent neutron radiation transport}
-Develope codes and proceedutres using portability frameworks with a demphsis on writing device kernels 
-\begin{todolist}
-    \item[done] Compare portability frameworks for deployment on both GPU and CPU platforms in a transient Monte Carlo neutron transport code
-    \item[] blah
-\end{todolist}
+This exploration attempts to answer RQ 1.
+\begin{enumerate}
+    \item \textbf{DONE} Compare portability frameworks for Monte Carlo neutron transport deployment on both GPU and CPU platforms in a transient code
+    \item \textbf{DONE} Support the production of a full Monte Carlo transport code and aid in the deployment to other accelerators
+    \item \textbf{Submitted} Publish this work for a general software engineering audience
+    \item \textbf{ONGOING} Conduct GPU performance analysis for fully time dependent problems of interest and publish
+\end{enumerate}
 
 
-\section{Explorations into GPU optimized Deterministic Schems}
-\begin{todolist}
-    \item[] Derive discretization scheme for time dependent, multi-group, Sn, neutron transport in slab geometry
-    \item[] Conduct Fourier analysis to show the stability of the discretization scheme
-    \item[] Implement a mono-energetic proof of concept of discritization schems in both Source iterations and One-cell inversions in a Python code for both CPUs and GPUs
-    \item[] Use the method of manufactured solution to verify the discretization scheme in mono-energetic problems and measure its convergence rate.
-    \item[] Implement discretization scheme in both a Source iteration and One-cell inversion iterative scheme performantly on GPUs and measure wall clock runtime
-    \item[] Publish this work
-\end{todolist}
+\section{Explorations into GPU optimized deterministic schemes}
+This investigation attempts to answer RQ 1 and 2, 3.
+\begin{enumerate}
+    \item \textbf{DONE} Derive discretization scheme for time dependent, multi-group, Sn, neutron transport in slab geometry
+    \item \textbf{DONE} Conduct Fourier analysis to show the stability of the discretization scheme;
+    \item \textbf{DONE} Implement a mono-energetic proof of concept of discretization schemes in both Source iterations and One-cell inversions in a Python code for both CPUs and GPUs;
+    \item \textbf{DONE} Extend simulation to be energy dependent with the multi-group assumption and explore in C++;
+    \item \textbf{ONGOING} Use the method of manufactured solution to verify the discretization scheme in problems and measure its convergence rate;
+    \item \textbf{DONE} Implement discretization scheme in both a Source iteration and One-cell inversion iterative scheme on GPUs using vendor supplied linear algebra libraries to abstract device kernels, and measure wall clock runtime; 
+    \item \textbf{DONE} Investigate transient effects on convergence rate of one-cell inversion and compare to source iteration; and
+    \item \textbf{ONGOING} Publish this work.
+\end{enumerate}
 
-\section{Exploration of Acceleration Schemes and/or Preconditioners}
+\section{Exploration of acceleration schemes for One-cell inversion}
+This exploration attempt to answer RQ 4
+\begin{enumerate}
+    %\item \textbf{ONGOING} Implement diffusion synthetic acceleration to Source iteration to have a comparison. This will eventually serve as a comparison;
+    \item \textbf{ONGOING} Derive and postulate various potential acceleration schemes, then down select to one or two schemes
+    \item Do fourier analysis on selected scheme
+    \item Implement acceleration scheme in code
+    \item Verify convergence to correct value using method of manufactured solutions and/or Monte Carlo results
+    \item Explore convergence rate in various problems
+    \item Publish this work
+\end{enumerate}
 
-\begin{todolist}
-    \item[] Implement diffusion synthetic acceleration to Source iteration to have a comparison
-    \item[] blahs
-\end{todolist}
-
-\section{Challenge problem}
+\section{Exploration of delta tracking using a hybrid tally}
+This study attempts to answer RQ 5
+\begin{enumerate}
+    \item \textbf{DONE} Implement the hybrid-delta tracking algorithm on a structured mesh in MCATK
+    \item \textbf{DONE} Compute runtime for speedup in materially complex problems using this novel scheme
+    \item \textbf{DONE} Publish this work
+    \item \textbf{ONGOING} Compute the macroscopic majorant cross section for an entire problem as a pre-process in MC/DC;
+    \item Under a boolean condition---set by the user at runtime---add rejection sampling and distance to collision sampling using the majorant;
+    \item When running in delta tracking mode use a path length estimator to tally the scalar flux and a collision estimator to tally other quantities of interest (i.e. reaction rates);
+    \item Test using a problem of interest and compare FOM for quantities of interest;
+    \item Publish this work
+\end{enumerate}
 
 \section{Possible difficulties and contingencies}
+The largest and most risky open question left in this research is weather we can find an acceleration scheme for one cell inversions in the thin limit.
+While explorations that result in a negative result are still essential and worth while, I list a few contingencies if acceleration schemes prove more difficult to come by:
+\begin{enumerate}
+    \item Investigations into a multi-grid multi-group scheme enabled by the solution of all angles and groups within a cell
+    \item 2D explorations of OCI with further performance analysis on GPUs using roofline models
+    \item Focusing an additional investigations into delta tracking in MC/DC, specifically looking at an adaptive energy scheme, where high energies with large MFPs use delta tracking and low energies use surface tracking
+\end{enumerate}
+

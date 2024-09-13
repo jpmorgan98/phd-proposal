@@ -15,3 +15,6 @@
 *.blg
 *.fdb_latexmk
 *.gz
+~$*
+/.DS_Store
+.vscode/
