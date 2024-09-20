@@ -2,21 +2,21 @@
 \label{ch-intro}
 
 \section {A brief overview}
-Predicting how neutral particle radiation moves through space and time is important when modeling inertial confinement fusion systems, pulsed neutron sources, and nuclear criticality safety experiments, among other systems.
-Simulating these problems is computationally difficult using any numerical method, as the neutron distribution is a function of seven independent variables: three in space, three in velocity, and time.
+Predicting how neutral particles move through space and time is important when modeling inertial confinement fusion systems, pulsed neutron sources, and nuclear criticality safety experiments, among other systems.
+Simulating these problems is computationally difficult using any numerical method, as the neutral particle distribution is a function of seven independent variables: three in space, three in velocity, and time.
 % This problem demands HPCs and specifically the exascale
-Modern HPC systems now enable high-fidelity simulation of neutron transport for problem types that have seldom been modeled before due to limitations of previous computers. % need citation?
+Modern HPC systems now enable high-fidelity simulation of neutral particle transport for problem types that have seldom been modeled before due to limitations of previous computers. % need citation?
 Exploration of both novel numerical methods that can better take advantage of modern HPCs and the methods of implementing them in code are warranted.
 % Specifically, large scale, highly dynamic transport problems require thousands of compute nodes using modern hardware accelerators (i.e., GPUs) \cite{hamilton_continuous-energy_2019, romano_openmc_nodate}.
 
-My research is broad in its application but thematically specific, to satiate the ever-present need to go faster: faster and more accurate numerical methods, and faster implementations of numerical methods into HPC-worthy code.
+My research is broad in its application but thematically specific---to satiate the ever-present need to go faster: faster and more accurate numerical methods, and faster implementations of numerical methods into HPC-worthy code to solve problems of ever growing complexity.
 I will first present my research questions, then provide more introduction to demonstrate the gaps in knowledge they seek to probe.
 Then I will present my itemized research objectives and tasks required to implement those objectives.
 I will briefly describe the methods already implemented and more thoroughly describe methods yet to be done.
 Finally I will present preliminary results and draw initial conclusions.
 
-This proposal is heavily supplemented by publications included as appendices.
-Explanations of methods and results is intentionally terse as to respect my committees' already generous time commitment and service.
+This proposal is heavily supplemented by published, submitted, and drafted articles included as appendices.
+Explanations of some methods is intentionally terse as to respect my committees' already generous time commitment and service.
 On that note I extend my most heart-felt gratitude to you and am keen and eager for the lively conversations sure to ensue about the work that I love.
 
 \hfill
@@ -28,8 +28,8 @@ Joanna Piper Morgan
 \subsection{Research questions}
 \begin{enumerate}
     \item Can relying on abstraction through using software libraries enable non-expert users to produce efficient-performing software for heterogeneous computing systems?
-    \item Will a space-parallel deterministic iterative solution algorithm outperform the standard angle-parallel iterative algorithm on heterogeneous architectures?
-    \item For deterministic neutron transport, does accounting for transient effects alter convergence rates of the iterative solution algorithms?
+    \item Will a space-parallel deterministic iterative solution algorithm (that lags the incident information on the bounds of a cell from a previous iteration) outperform the standard angle-parallel iterative algorithm on modern heterogeneous architectures?
+    \item For deterministic algorithms, does accounting for transient effects alter convergence rates of iterative solution algorithms?
     \item Can information coming from a streaming-only problem be used to inform cell boundary information and increase convergence rates of a one-cell inversion iteration algorithm?
     \item How can alternative Monte Carlo tracking schemes (namely Woodcock or delta tracking) be used be used to converge the quantities of interest faster?
 \end{enumerate}
@@ -39,8 +39,8 @@ Joanna Piper Morgan
 
 \section{Neutron transport}
 
-Transport equations are, at their most fundamental,equations of continuity.
-Due to their ubiquity in nature, transport equations are used to describe an incredible number of physical systems including fluid dynamics, chemical reactions, electromagnetism, energy, and heat transfer.
+Transport equations are, at their most fundamental, equations of continuity.
+Transport equations are ubiquitous in nature, describing a number of physical systems including fluid dynamics, chemical reactions, electromagnetism, energy, and heat transfer.
 My research contained herein focuses on neutron radiation transport specifically, but could easily be applied to other neutral particles, most relevantly photons \cite{radheattrans2003, chandrasekhar1960radiative}.
 In fact many of the methods of solution described in this document started as approximations for radiative heat transfer or photon transport.
 %justifying my ME degree
@@ -53,7 +53,7 @@ As with any other continuity equation it is written as a set of sources (on the 
     \psi(\boldsymbol{r}, E, \boldsymbol{\hat{\Omega}},t) dE' d\boldsymbol{\hat{\Omega}'} +
     s(\boldsymbol{r}, E, \boldsymbol{\hat{\Omega}},t) \;,
 \end{multline}
-where $\psi$ is the angular flux, $v$ is the velocity of the particles, $\Sigma$ is the macroscopic total material cross section, $\Sigma_s$ is the macroscopic scattering cross section, $\boldsymbol{r}$ is the location of the particle in three-dimensional space, $\boldsymbol{\hat{\Omega}}$ is the direction of travel in three-dimensional space, $s$ is the source of new particles being produced, $t$ is the time, and $E$ is the energy of the particles for $\boldsymbol{r} \in V$, $\boldsymbol{\hat{\Omega}} \in 4\pi$, $0<E<\infty$, and $0<t$ \cite{duderstadt_hamilton}. We also prescribe the initial condition
+where $\psi$ is the angular flux, $v$ is the velocity of the particles, $\Sigma$ is the macroscopic total material cross section, $\Sigma_s$ is the macroscopic scattering cross section, $\boldsymbol{r}$ is the location of the particle in three-dimensional space, $\boldsymbol{\hat{\Omega}}$ is the direction of travel in three-dimensional space, $s$ is the isotropic material source of new particles being produced, $t$ is the time, and $E$ is the energy of the particles for $\boldsymbol{r} \in V$, $\boldsymbol{\hat{\Omega}} \in 4\pi$, $0<E<\infty$, and $0<t$ \cite{duderstadt_hamilton}. We also prescribe the initial condition
 \begin{equation}
     \psi(\boldsymbol{r}, E, \boldsymbol{\hat{\Omega}},0) = \psi_{initial}(\boldsymbol{r}, E, \boldsymbol{\hat{\Omega}})
 \end{equation}
@@ -61,19 +61,19 @@ and the boundary condition
 \begin{equation}
     \psi(\boldsymbol{r}, E, \boldsymbol{\hat{\Omega}},t) = \psi_{bound}(\boldsymbol{r}, E, \boldsymbol{\hat{\Omega}},t) \text{ for } \boldsymbol{r} \in \partial V \text{ and } \boldsymbol{\hat{\Omega}} \cdot \boldsymbol{n} < 0 \;.
 \end{equation}
-A number of additional implicit assumptions are needed for the validity of this equation and my research including: particle-particle interactions are rare and can be neglected, neutrons are points in space with no volume, collision events occur instantaneously, and nuclear properties are known \cite{lewis_computational_1984}.
+A number of additional implicit assumptions are needed for the validity of this equation and my research including: particle--particle interactions are rare and can be neglected, neutrons are points in space with no volume, collision events occur instantaneously, and nuclear properties are known \cite{lewis_computational_1984}.
 This equation is commonly solved using both deterministic and Monte Carlo solution methods as analytic solutions are sparse.
 
 \section{Deterministic methods}
 
-To recast the neutron radiation transport equation (eq \ref{eq:fullNTE}) into a form solvable on digital computers continuous functions of space, time, angle, and energy must be discretized.
-Due to the nature of the NTE (intergro-PDEy-ness) an iterative scheme is also required.
+To recast the neutron radiation transport equation (Eq.~\eqref{eq:fullNTE}) into a form solvable on digital computers, continuous functions of space, time, angle, and energy must be discretized.
+Due to the nature of the NTE (intergro-PDE) an iterative scheme is also required.
 In this section I describe the discretizations and their assumptions for the 1D, time-dependent, multi-group solver proposed within this work.
 I will also describe the two fixed-point iterative schemes that I implement and discuss gaps in previous work of deterministic iterative solvers.
 My work with deterministic schemes can be separated into two categories:
 \begin{enumerate}
     \item How to use software engineering libraries to implement work more efficiently (RQ 1); and
-    \item Considering novel methods to converge the solution faster on modern hardware
+    \item Novel methods to converge the solution faster on modern hardware
     \begin{enumerate}
         \item A space-parallel iterative scheme on modern HPC GPUs (RQ2);
         \item How transient behavior impacts convergence of a space-parallel iterative scheme (RQ3); and
@@ -91,10 +91,10 @@ The method of discrete ordinance was also adapted to general radiative heat tran
 
 At this point it becomes necessary to describe the other governing assumptions I use in this work including:
 slab geometry (1D-rectilinear coordinates), isotropic scattering and sources, as well as the multi-group assumption in energy distribution.
-The methods I propose in this work are not restricted by these assumptions---and future work may extend the methods described herein to be valid for anisotropic distributions in angle and/or solutions on unstructured meshes----but are made here for simplicity.
-In-fact I make specific decisions in this work with the underlying discretization schemes to allow for eventual extension to these regimes.
+The methods I propose in this work are not restricted by these assumptions---and future work may explore the methods described here in anisotropic distributions in angle and/or solutions on unstructured meshes---but are made here for simplicity.
+In fact, I make specific decisions in this work with the underlying discretization schemes to allow for eventual extension to these regimes.
 
-When applied to equation \ref{eq:fullNTE} the resulting initialization point for my work is described by
+When applied to Eq.~\eqref{eq:fullNTE} the resulting initialization point for my work is described by
 \begin{multline}
     \label{eq:sn_nte}
     \frac{1}{v_g} \frac{\partial \psi_{m,g}(x,t)}{\partial t} + \mu_m \frac{\partial \psi_{m,g}(x,t)}{\partial x} + \Sigma_g(x) \psi_{m,g}(x,t)  \\
@@ -126,12 +126,13 @@ Various classes of spatial discretizations can be used in radiation transport.
 Finite difference, finite element, and finite volume methods are all often employed with the most common scheme being Diamond-Differencing $\mathcal{O}(2)$.
 Diamond-Difference is popular as it is the only second order space discretization that uses a single interior (cell-averaged) degree of freedom; however it only works on orthogonal grids.
 %Intended future investigation of the scheme in this research are into non-uniform meshes.
-While I will not include that analysis in this work, I do want to leave that opportunity open in order to better mesh with the modern state of the art of transport solvers which is on unstructured girds.
+To allow future work to more readily extend the algorithms described here to unstructured grids I make specific decisions about a discritization scheme---in other words, not Diamond-Differencing.
 Therefore, I used a finite volume scheme specifically designed for use on unstructured grids called corner-balance, which was originally developed by Adams~\cite{adams_subcell_1997}.
 It is a finite volume method and enforces conservation within subcell volumes in a spatial cell.
 Simple corner balance was determined to be sufficient as it is higher $\mathcal{O}(2)$ order.
 %Simple corner blance is not acrurate in the thin-limit however a slight alteration to it 
-In 1-D slab geometry, simple corner balance is equivalent to the lumped-linear discontinuous finite element method.
+Simple corner balance is equivalent to the lumped-linear discontinuous finite element method.
+This spatial discritization is similar to what has previously been implemented in both iterative schemes I introduce in section \ref{sec:syn_acc}.
 
 Solving the transport equation with deterministic methods typically involves iterative schemes to converge the scattering source and transport operators (this is discussed more in section \ref{sec:intro_itterative-scheme}).
 Thus implicit time marching schemes are often used to time step as they have desirable stability properties.
@@ -139,14 +140,14 @@ Specifically, implicit (backward) Euler $\mathcal{O}(1)$ or Crank-Nicolson $\mat
 %These schemes are advantageous as they often act like a wrapper around a steady state deterministic transport solver with few changes needed to implement.
 While Crank-Nicolson is second order accurate it is not robust and can produce negative solutions and spurious osculations.
 Time dependent multiple balance (TDMB) was derived by Variansyah, Larsen, and Martin~\cite{variansyah_robust_2021} to be a robust higher (second) order time discretization scheme.
-TDMB is developed from the physics informed "multiple-balance" approach which has also been developed as a space discretization scheme.
+TDMB is developed from the "multiple-balance" approach which has also been developed as a space discretization scheme.
 When implementing a higher order method to allow for greater work-to-communicate ratios I decided to use this scheme. 
 
 \subsection{Source-iteration}
 \label{sec:intro_itterative-scheme}
 
 The transport equation requires some kind of iterative scheme to converge the linkage between scattering source and transport operators.
-The source iteration (SI) method is commonly used to do this, often accompanied by preconditioners or synthetic accelerators, where the contribution to the solution from the scattering source (summation in the RHS of equation \ref{eq:sn_nte}) is allowed to lag, while the angular flux is solved in every ordinate via transport sweeps through the spatial domain \cite{adams_subcell_1997}.
+The source iteration (SI) method is commonly used to do this, often accompanied by preconditioners or synthetic accelerators, where the contribution to the solution from the scattering source (summation in the RHS of Eq.~\eqref{eq:sn_nte}) is allowed to lag, while the angular flux is solved in every ordinate via transport sweeps through the spatial domain \cite{adams_subcell_1997}.
 SI sweeps in Cartesian geometries are readily parallelized over the number of angles, as the source term is known from the previous iteration, allowing the angular flux in each ordinate to be computed independently. 
 While any parallelization is a boon to performance, a scheme that is embarrassingly parallel over the dimension with the greatest number of degrees of freedom---space---may be advantageous.
 In a single spatial dimension SI is \textit{annoying serial} in space and cannot be parallelized.
@@ -186,11 +187,11 @@ OCI allows for parallelizing over the number of cells as each cell is solved ind
 
 Rosa Warsaw and Perks (2013) \cite{rosa_cellwise_2013} previously investigated OCI as a potentially superior iterative scheme over SI on vectroized heterogeneous architectures.
 They supposed that because of the parallelism over the dominant domain, inherit data locality, ability to take advantage of LAPACK type libraries, and highly floppy operations present in an OCI type algorithm, it might out-perform an SI based implementation in wall clock runtime.
-The study was conducted on state of the art (at the) time RoadRunner super computer at Los Alamos National Lab and took advantage of its 64 bit PowerXCell vectorized accelerator---a precursor to GPGPUs seen in HPCs today.
-Rosa et al. implemented OCI in a 2D, multi-group, steady state, code using first order diamond differencing to discretize space, a multi-group scheme in energy distribution, and parallel block Jacobi and Gauss-Sidle iterations.
+The study was conducted on the state of the art (at the) time RoadRunner super computer at Los Alamos National Lab and took advantage of its 64 bit PowerXCell vectorized accelerator---a precursor to GPGPUs seen in HPCs today.
+Rosa et al. implemented OCI in a 2D, multi-group, steady state, code using bilinear discontinuous finite element method to discretize space \cite{tsa_2d2007rosa}, a multi-group scheme in energy distribution, and parallel block Jacobi and Gauss-Sidle iterations.
 
 The authors concluded that the acceleration seen per-iteration in OCI was not enough to make up for the decay in convergence rate that OCI incurs.
-As there is no communication of information between cells within an iteration (sometimes called a-synchronicity), OCI can require more iterations to converge to a solution for some of problems. 
+As there is no communication of information between cells within an iteration (also called a-synchronicity), OCI can require more iterations to converge to a solution for some of problems. 
 Specifically, as cellular optical thickness goes down, OCI's relative performance degrades with a spectral radius not bounded by one independent of scattering ratio.
 Figure~\ref{fig:specrad} illustrates this behavior, showing the spectral radii of the two iteration schemes as a function of cell thickness (in mean free path) and the scattering ratio.
 These values were computed numerically from an infinite medium problem (via reflecting boundaries) using steady-state calculations in S$_4$. 
@@ -203,7 +204,7 @@ The spectral radius of OCI decreases substantially as the optical thickness of t
     \caption{Spectral radii ($\boldsymbol{\rho}$) of OCI (left) and SI (middle) and the ratio between the two (right), where $\boldsymbol{\Sigma}$ is the total cross section, $\boldsymbol{\Delta x}$ is the cell width, and $\boldsymbol{\Sigma_s}$ is the scattering cross section}
     \label{fig:specrad}
   \end{figure}
-Rosa et al. also suggested that future developments in GPGPU accelerators might overcome this convergence rate decay for problems of interest.
+Rosa et al. also suggested that future developments in GPU accelerators might overcome this convergence rate decay for problems of interest.
 The idea there as that even though more iterations will be required to converge a solution those iterations will be able to be done sufficiently faster (in wall-clock-runtime) to mean a solution is computed faster (again in wall clock runtime) then source iterations.
 
 Other investigations have explored OCI as an acceleration scheme for SI \cite{anistratov_iterative_2015, hoagland_hybrid_2021}. %and a solution to the integral transport matrix method \citep{raffi2108pidotscom} and in the inexact parallel Jacobi scheme.
@@ -218,40 +219,42 @@ As the scattering ratio decreases, both iterative algorithms require fewer itera
 However, the spectral radius of OCI also decreases with increasing optical thickness, \textit{which is an added benefit}.
 When solving optically thick and highly scattering problems, small increases in $\Sigma$ may drastically improve the relative performance of OCI in comparison with SI.
 %Physically this can be understood as single particles living in single cells for many more iterations.
-Time step and cellular optical thickness are inversely proportional to each other, meaning a smaller time step will yield a larger effective total cross section, thus theoretically improving the spectral radius.
+Time step and cellular optical thickness are inversely proportional to each other (see eq. \ref{eq:tdmb+scb}), meaning a smaller time step will yield a larger effective total cross section, thus theoretically improving the spectral radius.
 This behavior is not expected to happen in source iterations as SI does not directly depend on cellular optical thickness---behaving linearly in that dimension for all but the most thick problems.
 
 \subsection{Synthetic acceleration}
+\label{sec:syn_acc}
 % acceleration schemes for SI
 In order to converge iterative schemes faster many synthetic acceleration techniques have been explored and implemented over the years \cite{adams_fast_2002}.
-The most common used in conjunction with source iterations is diffusion synthetic acceleration (DSA) which converges the slowest mode of SI---the so called diffusive-limit \cite{adams_fast_2002}.
-The failure of SI in the diffusive limit can be physically understood as there is no linking between angles within an iteration and a diffusive problem is a coupling of angles.
-DSA adds a mid-step correction term based off of a cheap to compute diffusion approximation of transport effects.
-Other synthetic acceleration techniques include quasi-diffusion and Boundary projection acceleration \cite{adams_fast_2002}.
+The most common approach used in conjunction with source iterations is diffusion synthetic acceleration (DSA)\cite{adams_fast_2002}.
+The slow convergence of SI in the diffusive limit can be physically understood as there is no linking between angles within an iteration and a diffusive problem is a coupling of angles.
+DSA adds a mid-step correction term based off of a cheap to compute diffusion approximation.
+%Other synthetic acceleration techniques include Boundary projection acceleration \cite{adams_fast_2002}. %find more
 
 % acceleration schemes for OCI
-Much less work has gone into exploring synthetic acceleration techniques for one cell inversions.
-The slowest mode of convergence of OCI is known to be the thin limit due to the a-synchronicity of the scheme (lagging cell-wise boundary fluxes) \cite{hoagland_hybrid_2021}.
-The spectral radius will decay unbounded in the thin limit, regardless of scattering ratio \cite{rosa_cellwise_2013}.
-Rosa and Warsa (2009) investigated using transport synthetic acceleration (TSA) as the low order synthetic accelerator via fourier analysis \cite{tsa2009rosa, tsa_slab2006rosa, tsa_2d2007rosa}.
-TSA uses a low order transport sweep with potentially fewer angles (when accompanied by SI) and a smaller scattering ratio (often controlled by the user by term $\beta \in [0,1]$) to inform the error correction equation \cite{tsa1997gilles}.
-In effect TSA is just a less expensive transport sweep, but a transport sweep none-the-less and comes with all the baggage I am trying to avoid of a transport sweep.
-Rosa and Warsa say as much when they suggest a scheme where TSA is only "turned on" after a given number of iterations fails to converge to a solution \cite{tsa2009rosa}.
+Previous work has also gone into exploring synthetic acceleration techniques for one cell inversions \cite{ kim_coarse_2000}.
+OCI is slow to converge in the thin limit due to the a-synchronicity of the scheme (lagging cell-wise boundary fluxes) \cite{hoagland_hybrid_2021}.
+The spectral radius will increase unbounded in the thin limit, regardless of scattering ratio \cite{rosa_cellwise_2013}.
+Rosa and Warsa (2009) investigated using transport synthetic acceleration (TSA) as a low order synthetic accelerator, performing a Fourier analysis \cite{tsa2009rosa, tsa_slab2006rosa, tsa_2d2007rosa}.
+TSA uses a low order transport sweep with potentially fewer angles and a smaller scattering ratio (often controlled by the user by term $\beta \in [0,1]$) to inform the error correction~\cite{tsa1997gilles}.
+In effect, TSA is a less expensive transport sweep that re-couples angles together, which is annoyingly parallel in space and may have significant performance impacts to an OCI scheme.
+Rosa and Warsa say as much when they suggest an algorithm where a mesh sweep is only used if convergence hasn't been achieved after a given number of iterations \cite{tsa2009rosa}.
 %TSA
 %While they suggest future work to implement, no published results of an OCI+TSA scheme.
 
 % gmres
 Both SI and OCI are forms of a fixed-point (or Richardson) iteration that use different operator splittings.
-In a fixed-point iteration an initial guess of the angular or scalar flux is supplied as a known to the solver which in turn returns an angular or scalar flux.
-This becomes the new guess and is iterated until the relative error between the guess and the output falls to below a given tolerance \cite{lewis1984computational}.
-Kyrlov methods on the other hand store multiple copies of the ``guess" as to compute the next guess in a way that is orthogonal of the previous \cite{gmres1996kelley, patton_application_2002}.
-Generalized minimal residual method (GMRES) specifically, has been shown to make DSA schemes that preform relatively poorly, work well \cite{kylov2004warsa}.
-%They work by keeping copies of the guess for a given number of previous iterates, compute residuals and ensure the next guess is orthogonal to the previous ones\cite{subspace2004warsa}.
+In a fixed-point iteration an initial guess of the angular or scalar flux is supplied as a known to the solver which in turn returns an angular or scalar flux (see section \ref{sec:syn_acc}).
+This becomes the new guess and this iterative process continues until the relative error between the guess and the output falls below a given tolerance \cite{lewis1984computational}.
+Krylov methods work by keeping copies of the guess for a given number of previous iterates, compute residuals and ensure the next guess is orthogonal to the previous ones\cite{gmres1996kelley, patton_application_2002}.
+The generalized minimal residual (GMRES) method specifically, has been shown to make DSA schemes that perform relatively poorly, work well \cite{kylov2004warsa, subspace2004warsa}.
 
 \subsection{Novelty and relation to research questions}
 
-The hypothesized additional benefit of of OCI in a time dependent code (RQ 3) coupled with the vast improvements in GPGPU accelerators in the past decade since Rosa et al. \cite{rosa_cellwise_2013} conducted their investigations (RQ 1 and 2), along with the ability to explore higher order spatial and transient discretization schemes (RQ 2) motivates the first publication associated with this work.
-After that an exploration of a synthetic acceleration algorithm to converge OCI in the thin limit will become the second (RQ 4).
+The first publication associated with this work is motivated by the hypothesized additional benefit of OCI in a time dependent code (RQ 3) coupled with the vast improvements in GPU accelerators in the past decade since Rosa et al. \cite{rosa_cellwise_2013} conducted their investigations (RQ 1 and 2).
+A rough draft of this first publication is included in Appendix \ref{app:therefore}.
+I plan to submit this work before the new year.
+The next publication will be an exploration of a synthetic acceleration algorithm to converge OCI in the thin limit (RQ 4).
 %Furthermore, as previously mentioned, source iterations are often implemented in production accompanied by some kind of synthetic-acceleration scheme or other preconditioner to converge it's slowest converging mode (the diffusive limit).
 %OCI has never been implemented with a prevonditon
 
@@ -259,7 +262,7 @@ After that an exploration of a synthetic acceleration algorithm to converge OCI 
 
 %Predicting how neutrons move through space and time is important when modeling inertial confinement fusion systems, pulsed neutron sources, and nuclear criticality safety experiments, among other systems.
 
-While deterministic schemes produce an exact solution to an inexact problem Monte Carlo methods provide an inexact solution---with an associated error---to an exact problem.
+While deterministic schemes produce an exact solution to an inexact problem, Monte Carlo methods provide an inexact solution---with an associated error---to an exact problem.
 Monte Carlo methods can treat the independent variables of the NTE (space, angle, time, energy) as continuous, thus eliminating the discretization errors seen with deterministic methods.
 The behavior of neutrons can be modeled with a Monte Carlo simulation, where pseudo-particles with statistical importance are created and transported to produce a particle history \cite{lewis_computational_1984}.
 A particle's path and the specific set of events that occur within its history are governed by pseudo-random numbers, known probabilities (e.g., from material data), and known geometries.
@@ -277,20 +280,19 @@ New Monte Carlo schemes could converge the solution faster in wall-clock time wi
 My work with Monte Carlo schemes---as with my deterministic work---is broadly divided into two categories
 \begin{enumerate}
     \item How to use software engineering libraries to implement work more efficiently (RQ 1); and
-    \item Considering novel methods to converge the solution faster on modern hardware (RQ 5).
+    \item Novel methods to converge the solution faster on modern hardware (RQ 5).
 \end{enumerate}
-The first section digs into the first goal examining performance portability schemes in high level languages and the work that is currently deployed in Monte Carlo/Dynamic Code (MC/DC) as part of my work with the Center for Exascale Monte Carlo Neutron Transport (CEMeNT).
+The first section digs into the first goal, examining performance portability schemes in high-level languages and the work that is currently deployed in Monte Carlo/Dynamic Code (MC/DC) as part of my work with the Center for Exascale Monte Carlo Neutron Transport (CEMeNT).
 The second contains work initially done in a production code at Los Alamos National Laboratory and a proposed extension of the scheme the scheme in an implementation in MC/DC.
 
 \subsection{Portability frameworks for Monte Carlo methods}
 
-In this section I introduce initial investigations into high-level performance portability frameworks and discuss 
-Developing software to simulate physical problems that demand high-performance computing (HPC) is difficult.
+In this section I introduce initial investigations into high-level performance portability frameworks.
+Developing software to simulate physical problems that demand HPC is difficult.
 Modern HPCs commonly use both CPUs and GPUs from various vendors.
 Years can be spent porting a code from CPUs to run on GPUs, then again when moving from one GPU vendor to the next \cite{pozulp_progress_2023}.
 Portability issues compound when designing software for rapidly developing numerical methods where algorithms need to be both implemented and tested at scale.
-Finding a software engineering approach that balances the need for portability, rapid development, open collaboration, and performance can be challenging especially when numerical schemes do not rely on commonly library implemented operations (i.e., linear algebra as in LAPACK or Intel MKL). 
-% one paragraph for CISE reqirments
+Finding a software engineering approach that balances the need for portability, rapid development, open collaboration, and performance can be challenging especially when numerical schemes do not rely on operations commonly implemented in libraries   (i.e., linear algebra as in LAPACK or Intel MKL). 
 
 Common HPC software engineering requirements are often met using a Python-as-glue-based approach, where peripheral functionality (e.g., MPI calls, I/O) is implemented using Python packages but compiled functions are called through Python's C-interface where performance is needed.
 Python-as-glue does not necessarily assist in the production of the compiled compute kernels themselves---what the Python is gluing together---but can go a long way in simplifying the overhead of peripheral requirements of HPC software.
@@ -313,8 +315,8 @@ API calls are made through Numba on both the Python side (e.g., allocate and mov
 When compiling to GPUs, Numba supports an even smaller subset of Python, losing most of the operability with NumPy functions.
 If functions are defined using only that smallest subset, Numba can compile the same functions to CPUs or GPUs, or execute those functions purely in Python.
 Numba data allocations on the GPU can be consumed and ingested by functions from CuPy if linear-algebra operations are required in conjunction with user-defined compute kernels.
-
-When targeting use of a Python portability scheme to HPC for neutron transport I compared the same algorithm in various implementations using PyKokkos \cite{AlAwarETAL21PyKokkos}, PyCUDA/PyOpenCL \cite{kloeckner_pycuda_2012}, and Numba \cite{morgan2022}.
+When targeting use of a Python portability scheme to HPC for neutron transport I compared the same transient Monte Carlo neutron transport algorithm in various implementations using PyKokkos \cite{AlAwarETAL21PyKokkos}, PyCUDA/PyOpenCL \cite{kloeckner_pycuda_2012}, and Numba \cite{morgan2022}.
+After these initial investigations a Numba+mpi4py software engineering scheme was deemed the most viable for implementation in MC/DC.
 
 %Numba has been shown to be slower then other high level portability frameworks for unoptimized matrix multiplication \cite{Godoy_2023}.
 %Monte Carlo neutronic workflows are so memory bound that it's doubtful even significant changes to FLOP performance of a 
@@ -326,30 +328,31 @@ When targeting use of a Python portability scheme to HPC for neutron transport I
 
 \subsection{Delta tracking}
 
-Woodcock, or delta, tracking \cite{woodcock1965} is a variance-reduction technique that computes the majorant cross-section for the whole problem space, then uses this to determine a distance to collision for all particles.
+This section describes a variance reduction technique that propose to implement in MC/DC.
+Woodcock, or delta, tracking \cite{woodcock1965} is a variance-reduction technique that computes the majorant cross-section for the whole problem space, then uses it to determine a distance to collision for all particles.
 Coupled with rejection sampling to sort for phantom collisions, and a collision estimator to compute scalar flux, delta tracking often improves performance over analogue Monte Carlo in problems that warrant it (problems with a long mean free path).
 Many production Monte Carlo Neutron transport codes like Serpent \cite{Serpent2013, leppanen_use_2017, leppanen_performance_2010} and others \cite{delta2017rowland} use this method.
 In traditional delta tracking first the macroscopic majorant cross section is computed for the entire problem space
 \begin{equation}
     \label{eq:majorant}
-    \Sigma_{M}(E) = \max\left(\Sigma_{T,b}(E), ..., \Sigma_{T,B}(E)\right) \,\text{,}
+    \Sigma_{M}(E) = \max\left(\Sigma_{b}(E), ..., \Sigma_{B}(E)\right) \,\text{,}
 \end{equation}
-where $E$ is energy, $\Sigma_{M}$ is the microscopic majorant cross-section, and $\Sigma_{T,b}$ is the microscopic total cross-section of the $=b^{\text{th}}$ material.
+where $E$ is energy, $\Sigma_{M}$ is the microscopic majorant cross-section, and $\Sigma_{b}$ is the total microscopic cross-section of the $=b^{\text{th}}$ material.
 Now to sample a the distance to a collision
 \begin{equation}
     \label{eq:sample}
     D = \frac{-\ln{\xi}}{\Sigma_{M}(E)} \, \text{,} 
 \end{equation}
 where $\xi\in[0,1]$.
-If the potential collision occurs within the cell, we move the particle to the sampled distance and do rejection sampling, since we are now potentially forcing collisions that did not occur.
+If the potential collision occurs, we move the particle to the sampled distance and do rejection sampling, since we are now potentially forcing collisions that did not occur.
 We sort out these phantom collisions by allowing particles to continue to a new sampled distance if
 \begin{equation}
     \label{eq:reject}
-    \xi < \frac{ \Sigma_{T,j}(E) } { \Sigma_M(E) } \, \text{,}
+    \xi < \frac{ \Sigma_{j}(E) } { \Sigma_M(E) } \, \text{,}
 \end{equation}
-where $\xi\in[0,1]$ is a new random number and $\Sigma_{T,j}(E)$ is the macroscopic total cross-section of the cell $j^{th}$ current cell.
-Standard delta tracking is required to use a collision estimator which is less efficient then the normal track length estimator used in surface tracking\cite{mc2018}.
-If I can find a way to use the track-length estimator while doing delta tracking we could improve the performance of a Monte Carlo code (RQ 5).
+where $\xi\in[0,1]$ is a new random number and $\Sigma_{j}(E)$ is the total macroscopic cross-section of the material ($j^{th}$) where the particle currently resides.
+Standard delta tracking is required to use a collision estimator which is less efficient then the normal track length estimator used in surface tracking~\cite{mc2018}.
+My goal is to find a way to use the track-length estimator while doing delta tracking which may improve the performance of a Monte Carlo code (RQ 5).
 
 \if
 \section{GPU and GPU performance Anylisi}

@@ -61,6 +61,23 @@
 %----------------------------------------------------------------------------------------
 %	ADD YOUR CUSTOM VALUES, COMMANDS AND PACKAGES
 %----------------------------------------------------------------------------------------
+\usepackage{siunitx}
+\sisetup{group-separator={,},
+     detect-all,
+     list-units = single,
+     range-units = single,
+     range-phrase = --,
+     per-mode = symbol-or-fraction,
+     separate-uncertainty = true,
+     list-final-separator = {, and }
+%    scientific-notation = fixed
+}
+\DeclareSIUnit\atm{atm}
+\DeclareSIUnit\bar{bar}
+\DeclareSIUnit\flops{FLOPS}
+\DeclareSIUnit\pflops{PFLOPS}
+
+\usepackage{booktabs}
 
 % Open Preamble/mydefinitions.tex and enter some values (name, thesis title...) 
 % and include your own custom LaTeX functions and packages

@@ -6,8 +6,8 @@ This section is heavily supplemented by publications included as appendices to t
 
 \section{Deterministic transport}
 
-For deterministic methods appendix \ref{app:therefore} contains, expanded derivations of the higher order space-time-energy discretization scheme, derivation of Fourier analysis of the discretization scheme, derivation of the method of manufactured solution, and description of the implementation in code.
-The remainder of this section will be devoted to describing the current state of the investigations into an acceleration scheme for OCI in the thin limit (see section \ref{ssec:method_acc}).
+For deterministic methods, Appendix~\ref{app:therefore} contains expanded derivations of the higher order space-time-energy discretization scheme, derivation of Fourier analysis of the discretization scheme, derivation of the method of manufactured solution, and description of the implementation in code.
+The remainder of this section will be devoted to describing the current state of investigations into an acceleration scheme for OCI in the thin limit (see section \ref{ssec:method_acc}).
 
 \subsection{Derivation of Higher order Methods in Iterative Schemes}
 
@@ -40,10 +40,10 @@ When the S$_N$ transport equation is descritzed in space using simple corner bal
     + \frac{\Delta x_j}{2} \Sigma_{j} \psi_{m,g,k+1/2,j,R} = \frac{\Delta x_j}{2} \frac{1}{2} \left( \sum\limits_{g' = 0}^G \Sigma_{s,j, g'\to g} \sum\limits_{n=1}^N w_n \psi_{n,g',k+1/2,j,R} + Q_{k+1/2,j,g,R} \right) \;,
     \end{multline} 
 \end{subequations}
-
+%
 where $\Delta x$ is the cell width, $j$ is the spatial index, $L$ and $R$ denote the right and left half-cell averaged quantities, $k$ is time averaged quantities, $k+1/2$ is time edge quantities.
 These equations contain a spatial---the angular flux at the cell midpoint is a simple average of the two half-cell average quantities---and a time---\textit{upstream} prescription for the cell-edge angular flux---closures.
-This defines system defines angular flux on a stencil shown in figure \ref{fig:stencil}.
+This defines quantities of interest on the stencil shown in figure \ref{fig:stencil}.
 
 \begin{figure}[!htb]
     \centering
@@ -55,21 +55,21 @@ This defines system defines angular flux on a stencil shown in figure \ref{fig:s
 %Figure \ref{fig:stencil} shows the stencil location for angular flux and source terms. 
 
 In the traditional source iteration, the scattering source is presumed known from a previous iteration, which leads to the following set of equations to be solved in transport ``sweeps''.
-This means that new estimates of both the end of time-step value of angular flux and time-averaged angular flux are computed together in each cell. 
+This means that new estimates of both the end of time-step value of angular flux and time-averaged angular flux are computed together in each cell ordinate and group. 
 So a $4\times4$ sized system (from stencil values) of equations must be solved to go from cell to cell in each angle.
 This process is annoyingly serial over space, but embarrassingly parallel over angles.
 The whole system sparse matrix is block (in each ordinate) lower triangular (over all cells).
-Source iterations couple angles together in the iterative method by use of the scalar flux term.
+Source iterations couple angles together in the iterative method by use of the scalar flux.
 
 In OCI, the scattering source is subtracted to the left-hand side, and the information that comes from cells other than cell $j$ is assumed to be known from a previous iteration.
 This means that all $4NG$ angular fluxes ($N$ angles, $G$ groups, and stencil values $L$, $R$, $k$, $k+1/2$) are computed simultaneously in cell $j$.
-For SCB in slab geometry, this means there is a local $4NG \times 4NG$ matrix to be solved in each cell.
+For simple corner balance in slab geometry, this means there is a local $4NG \times 4NG$ system of equations to be solved in each cell.
 
 
 \subsection{Fourier Analysis}
 
 To ensure that our combination of higher-order discretization schemes is still unconditionally stable, we performed a Fourier analysis to find the slowest-converging mode of the method.
-Assuming no scattering, no sources, homogeneous, mono-energetic problem, and make physical assumptions (only positive values of $\Delta x$, $\Delta t$, $\Sigma$, and $v$) we derived SCB-MB's eigen-function and numerically solve it. 
+Assuming no scattering, no sources, homogeneous, mono-energetic problem, and make physical assumptions (only positive values of $\Delta x$, $\Delta t$, $\Sigma$, and $v$) we derived the space-time discritization scheme's eigen-function and numerically solve it (see Appendix~\ref{app:therefore}).
 % \begin{subequations}
 % \begin{align}
 %     \psi_{k+1/2,j,L} &= \theta^{k+1}a e^{i\omega j}
@@ -94,12 +94,13 @@ Assuming no scattering, no sources, homogeneous, mono-energetic problem, and mak
 \subsection{Verification using method of manufactured solution}
 
 Finding benchmark problems that simulate transient, energy dependent, single dimension solutions to the neutron transport equation is difficult \cite{roy_review_2005}.
-I used the Method of Manufactured solutions to derive my own benchmark \cite{nse_mms_warsaw}.
-It is wildly accepted in the flied  and has previously been used to verify other deterministic neutron transport codes including the production code solver MOOSE \citep{wang_application_2018,moosemms}.
+I used the method of manufactured solutions (MMS) to derive my own benchmark \cite{nse_mms_warsaw}.
+It is widely accepted in the field and has previously been used to verify other deterministic neutron transport codes including the production code solver MOOSE \citep{wang_application_2018,moosemms}.
 
-The method of manufactured solutions follow a backward solving technique where a solution is made-up---expressing any desired behavior (e.g. smoothness, differentiability, positivity, etc.)---then inserted into the governing equation and solved for the source term.
-The manufactured source source is supplied to the solver to verify that it converges to the correct solution at the expected rate. 
-To implement MMS I start with a manufactured continuous functional representation of the angular flux in angle, energy, space and time.
+MMS follows a backward solving technique where a solution is made-up---expressing any desired behavior (e.g., smoothness, differentiability, positivity)---then inserted into the governing equation and solved for the source term.
+The manufactured source is supplied to the solver to verify that it converges to the correct solution. %at the expected rate. 
+To implement MMS I start with a manufactured continuous functional representation of the angular flux in angle, space and time adapted from Eq.~(7) in reference \cite{wang_application_2018} for time dependence.
+When moving to multi-group two equations will be used to define the flux in group one and two with the group to group scattering operator linking them together.
 %\begin{subequations}
 %    \label{eq:manufactured_sol}  
 %    \begin{align}
@@ -107,7 +108,8 @@ To implement MMS I start with a manufactured continuous functional representatio
 %        \psi_2(x,t,\mu) = (1-\mu^2)(-x^4 + x + 1)e^{-t/2} \label{eq:af_mms_cont2}
 %    \end{align}
 %\end{subequations} 
-These equations can now be inserted into the NTE (eq \ref{eq:sn_nte}) and solved for a continuous functional representation of the source $Q$.
+
+These equations can now be inserted into the NTE (Eq.~\eqref{eq:sn_nte}) and solved for a continuous functional representation of the source $Q$.
 From there the source equations are placed on the stencil by averaging (via numerical integration) in space and time where necessary (see figure \ref{fig:stencil}).
 This discretized set of sources is then supplied to the solver and the converged angular flux it provides is then compared to the original manufactured source (again placed on the stencil).
 %The range we will be solving these equations is $x \in [0,1]$, $t \in [0,5]$ and $\mu \in [-1,1]$.
@@ -139,104 +141,103 @@ This discretized set of sources is then supplied to the solver and the converged
 \subsection{Implementation in code}
 
 I use the ROCm compute library to solve the system of equations.
-Modern GPU vendor supplied LAPACK libraries often include a \texttt{strided\_batched} class of solvers.
+Modern GPU vendor-supplied LAPACK libraries often include a \texttt{strided\_batched} class of solvers.
 These will operate on a group of like-sized systems in unison and are optimized by the vendors of the hardware themselves.
-For example, LU decomposition with pivoting (the most generic direct solver for a system of linear equations) is implemented using RocSolvers \texttt{strided\_batched\_dgsev}.
-Direct solvers where used in this work because all systems where smallish (with orders ranging between 4 and 1000).
+For example, LU decomposition with pivoting (the most generic direct solver for a system of linear equations) is implemented using rocSOLVER \texttt{strided\_batched\_dgsev} \cite{rocsolver}.
+Direct solvers are used in this work.
+Currently all systems are assumed dense which for OCI might not be prudent.
+Future work could look into using sparse direct solvers which are similarly available as their dense siblings.
 %Spare direct solvers could be utilized in the future to decrease memory footprint of OCI schemes specifically.
 This makes the use of a strided batched implementation of LU decomposition with pivoting ideal.
-Furthermore in this work once that system is solved once the return of the A matrix is automatically L+U+D.
-In subsequent iterations this system can be back solved very quickly.
-For both schemes the entire convergence loop was executed on the GPU.
+Furthermore in this work once that system is solved the return of the A matrix is automatically the decomposition: $L+U+D$.
+In subsequent iterations this system can be back solved very quickly again using library functionality (RQ1).
+For both schemes the entire convergence loop was executed on the GPU (see appendix \ref{app:therefore}).
+Profiling was used to ensure that both sets of compute kernels where performant.
 
 \subsection{Exploration of acceleration scheme}
 \label{ssec:method_acc}
 
 This section discusses ongoing work: the derivation of an acceleration scheme for OCI in the thin limit.
-When working with the iterative schemes it becomes useful to define systems in operator notation.
+When working with iterative schemes, it becomes useful to define systems in operator notation.
 The NTE can be written generally as
 \begin{equation}
     H\psi = q
 \end{equation}
-where $H$ is some invertible operator, $\psi$ is the unknown function for angular flux and $q$ is some source.
-To solve this equation we split H into components that makes sense given the NTE, then let something lag and something lead (assuming a fixed point iteration).
-How that operator is split is what differentiates OCI from SI.
-For example if we choose $H = L-S$ where $L$ is the left hand side of the transport equation and $S$ is the scattering source and finally let the fluxes on the source lag we get
+where $H$ is the transport operator, $\psi$ is the unknown function for angular flux and $q$ is some source.
+To solve this equation H can be split into components that make sense given the NTE, then lagging and leading components can be established (assuming a fixed point iteration).
+How the operator is split is what differentiates OCI from SI.
+For example if $H = L-S$ where $L$ is the left hand side of the transport equation and $S$ is the scattering operator and lag the angular fluxes on the scattering operator,
 \begin{equation}
     L\psi^{l+1} = S\psi^l + q
 \end{equation}
-which is a source iteration.
-For now we will start with OCI's operator notation from Rosa, Warsaw, and Perks (2013) \cite{rosa_cellwise_2013} which they call cellwise-bJ
-\begin{equation}
-    \label{eq:operator_nte}
-    (L-S)\psi = q
-\end{equation}
-where $L$ = streaming thru space and time and total integration operator, %\\ ($\mu_m\frac{\partial\psi}{\partial x} + \frac{1}{v}\frac{\partial\psi}{\partial t} + \Sigma \psi$)
-$S$ is the scattering operator (discrete-to-moment operator) which couples all the simultaneous PDEs together, %\\($\Sigma_s \int^1_{-1}\psi\partial\mu = \Sigma_s \sum_{n=0}^{M}w_n\psi_n = \Sigma_s\phi$)
+which is a source iteration where $L$ = streaming thru space and time and total absorption operator, %\\ ($\mu_m\frac{\partial\psi}{\partial x} + \frac{1}{v}\frac{\partial\psi}{\partial t} + \Sigma \psi$)
+$S$ is the scattering operator (discrete-to-moment operator) which couples all the simultaneous PDEs in angle and group together, %\\($\Sigma_s \int^1_{-1}\psi\partial\mu = \Sigma_s \sum_{n=0}^{M}w_n\psi_n = \Sigma_s\phi$)
 $\psi$ angular flux (dependent variable of interest), and
 $q$ is the fixed material source.
-OCI works by lagging the incident cell wall fluxes of the cell.
-Those flux come from the upstream closure that transport solvers use.
-Thus it is convenient to define,
+This is where Rosa, Warsaw, and Perks (2013)~\cite{rosa_cellwise_2013} start in there anylisys of OCI which they call cellwise-bJ.
+OCI works by lagging the incident cell wall fluxes of the neighboring cells.
+Those fluxes come from the upstream closure that transport solvers use.
+Thus it is convenient to further split L,
 \begin{equation}
     L = L_c + L_b
 \end{equation}
-where $L_c$ are the angular fluxes within a mesh cell and $L_b$ are the angular fluxes incident to the mesh cell's surface.
+where $L_c$ are the angular fluxes within a mesh cell and $L_b$ are the angular fluxes incident to the mesh cell's surface (boundary).
     %\\($\mu_m\psi_b\frac{dA}{dx} + \frac{1}{v}\psi_b\frac{dA}{dx}$)
-Note that what $L_b$ actually consists of depends on the space discretization.
-After this operator splitting equation \ref{eq:operator_nte} now becomes
+Note that what $L_b$ actually consists of depends on the spatial discretization.
+After this operator splitting Eq.~\eqref{eq:operator_nte} now becomes
 \begin{equation}
     \psi[I+(L_c-S)^{-1}L_b] = (L_c-S)^{-1}q
 \end{equation}
-where I is the identity matrix.
-When we prescribe what lags in OCI (incident fluxes on the surface of the cell) this becomes
+where $I$ is the identity matrix.
+When OCI's prescribe of what lags (incident fluxes on the surface of the cell) is used this becomes
 \begin{equation}
     \label{eq:itter}
     \psi^{(l+1)} = (L_c-S)^{-1}(-L_b\psi^l+q)
 \end{equation}
 
 When looking for an acceleration scheme examining the structure of $L_b$ becomes important.
-In my research I use the TDMB+SCB discretization for time dependent single dimension multi-group Sn problems (equation \ref{eq:tdmb+scb}).
-If the angular fluxes from the boundary of the cell are identified (denoted by $j\pm1/2$) we can identify $L_b$'s structure generally.
-It should be something like $\pm\mu_m$ filled along four diagonals with every 4th space filled.
-This is also similar to how the SI equations look if formed as a lower triangular system.
+In my research I use the TDMB+SCB discretization for time dependent single dimension multi-group Sn problems (see Eq.~\eqref{eq:tdmb+scb}).
+If the angular fluxes from the boundary of the cell are identified (denoted by $j\pm1/2$) $L_b$'s structure can be generally identified.
+It should be something like $\pm\mu_m$ filled along four diagonals with every 4$^{th}$ space filled.
+This is also vaguely similar to how the SI equations look if formed as a lower triangular system.
 In higher dimensions I expect the structure to remain mostly the same for rectilinear grids but might get more complex for unstructured meshes where surface areas may become an issue.
-For now we generally know the structure of $L_b$
 
-Next lets think about the within cell operator $L_c$.
-We know $L_c$ contains the differential and absorption terms from the NTE.
-We know that OCI converges in the thin limit due to a-synchronicity \cite{rosa_cellwise_2013, hoagland_hybrid_2021}, measured in mean-free paths (MFP)s.
-So I know a small MFP leads to a large condition number of our iteration matrix, and thus slow convergence.
-To isolate this term we start with
+Next I examine the within cell operator: $L_c$.
+$L_c$ contains the differential and absorption terms from the NTE.
+Also, OCI's converge rate decays in the thin limit due to a-synchronicity \cite{rosa_cellwise_2013, hoagland_hybrid_2021}, which is indicated by a small mean-free path (MFP).
+So a small MFP leads to a large condition number of our iteration matrix, thus slow convergence.
+To isolate this term I use operator splitting again
 \begin{equation}
     L_c = K_d + K_a
 \end{equation}
-where $K_d$ is the differential operators and absorption term:
+where $K_d$ is the differential operators and
 \begin{equation}
     K_a = \frac{\Delta x \Sigma}{2}  I
 \end{equation}
-$K_a$'s structure is pretty easy to identify from the equations \ref{eq:tdmb+scb}.
+is the absorption term.
+$K_a$'s structure is simple and clear from the equations \ref{eq:tdmb+scb}.
 I could pull out a solitary $\Sigma$ but in this form I can identify that
 \begin{equation}
     K_a = \frac{\text{MFP}}{2}  I
 \end{equation}
 Pushing forward I break up our equations into a standard synthetic approach.
-I start with equation \ref{eq:itter} but recast it with some of the expansions I just identified,
+I start with Eq.~\eqref{eq:itter} but recast it with some of the expansions identified,
 \begin{equation}
     \psi^{l+1}(K_d + \delta I - S) = (-L_b\psi^l + q)
 \end{equation}
-where $\delta=$ MFP$/2$. Now we can write the associated equation for the iteration error as,
+where $\delta=$ MFP$/2$.
+Now the associated equation for the iteration error is,
 \begin{equation}
     (K_d + \delta I-S) f^{l+1} = -L_b f^l
 \end{equation}
 where $f^{l+1} = \psi^{\text{converged}}-\psi^{l+1/2}$ and $f^{l} = \psi^{\text{converged}}-\psi^{l}$.
 Note that this equation is exact in it's current forum.
-Now we use $-L_bf^{l-1}$ as our special one and subtract from both sides
+Now $-L_bf^{l-1}$ is subtracted from both sides:
 \begin{equation}
     (K_d + \delta I - S + L_b)f^{l+1} = L_b(f^{l+1}-f^l)
 \end{equation}
-Notably here if we re-add everything back together we should still have equation \ref{eq:itter}.
-Now we can formally set up our synthetic-two-step starting with equation \ref{eq:itter} rewritten for half steps
+Notably if everything re-combined Eq.~\eqref{eq:itter} is reformed.
+So a synthetic acceleration system starting with Eq.~\eqref{eq:itter} rewritten for half steps is
 \begin{subequations}
     \begin{equation}
         \label{eq:acc1}
@@ -258,8 +259,8 @@ where,
     M \approx (K_d + \delta I + L_b - S)^{-1}
 \end{equation}
 and is easier to obtain then the actual inverse.
-Note that eq 3 from ref \cite{tsa2009rosa} is the recombined version of eq \ref{eq:acc2}.
-From here estimations can be made about what a good approximate of $M$ will be in the conditions where \ref{eq:acc1} degrades.
+Note that equation 3 from ref \cite{tsa2009rosa} is the recombined version of Eq.~\eqref{eq:acc2}.
+From here estimations can be made about what a good approximate of $M$ will be in the conditions where Eq.~\eqref{eq:acc1} degrades.
 %If we actually inverted $H$ this would just be another transport step.
 %Note that we can relate this idea of synthetic acceleration to preconditioning by noting
 %\begin{equation}
@@ -299,35 +300,35 @@ From here estimations can be made about what a good approximate of $M$ will be i
 %What ever scheme is used it can be supplemented by GMRES
 
 \section{Monte Carlo transport methods}
-As in the previous section the methods employed are described in attached publications in the appendix.
-They are beefily summarized here but far more information is contained there for the edification of the reader.
+As in the previous section the methods employed are further described in attached publications in the appendix.
+They are briefly summarized here.
 
 %   
-\subsection{Python based portability for rapid methods development}
+\subsection{Python-based portability for rapid methods development}
 
-A software engineering scheme was developed and deployed in Monte Carlo/Dynamic Code \cite{morgan_monte_2024} using the Numba compiler for Python \cite{lam_numba_2015}, mpi4py \cite{mpi4py_2021}, and an a-synchronous GPU event scheduler called Harmonize \cite{brax2023} (\textit{see appendix \ref{app:cise}}).
-MC/DC can run the same set of physics functions written by subject-area experts in the Python interpreter or compiled to x86-64, ARM64, Power9 CPUs and AMD and Nvidia GPUs.
+A software engineering scheme was developed and deployed in Monte Carlo/Dynamic Code \cite{morgan_monte_2024} using the Numba compiler for Python \cite{lam_numba_2015}, mpi4py \cite{mpi4py_2021}, and an a-synchronous GPU event scheduler called Harmonize \cite{brax2023} (See Appendix~\ref{app:cise}).
+MC/DC can run the same set of physics functions written by subject-area experts in the Python interpreter or compiled to x86-64, ARM64, and Power9 CPUs as well as AMD and Nvidia GPUs.
 All compilation targets also support the use of MPI to distribute work to multiple nodes of an HPC.
 It is a demonstration of portability using a high-level language coupled to a portability framework to enable rapid methods development.
 
 \subsection{Delta tracking in MCATK and MC/DC}
 
-In MCATK a hybrid delta-surface tracking scheme was developed and deployed (\textit{see appendix \ref{app:hybridmcatk}}).
-I initially implemented this scheme upto the work presented, but it has been extended by others and is shipped in current production versions of MCATK.
-The point of the delta-surface tracking scheme in MCATK was entirely to avoid extra macroscopic cross section lookups.
-It still conducted surface tracking on mesh.
-After implementation the hybrid delta-tracking scheme was tested in both k-eigenvalue and fixed source transient simulations using the,
+In MCATK a hybrid delta-surface tracking scheme was developed and deployed (See Appendix~\ref{app:hybridmcatk}).
+I initially implemented this scheme (my work is fully described by the publication included in Appendix \ref{app:hybridmcatk}), but it has been extended by others and is shipped in current production versions of MCATK.
+The point of the delta-surface tracking scheme in MCATK is entirely to avoid extra expensive macroscopic cross section lookups.
+It still conducts surface tracking on mesh.
+After implementation the hybrid delta-tracking scheme was tested in both k-eigenvalue and fixed source transient simulations using the
 \begin{itemize}
-    \item HEU-MET-FAST-086 benchmark of Godiva IV \cite{godivaiv2021}; and
+    \item HEU-MET-FAST-086 benchmark of Godiva IV \cite{godivaiv2021}, and
     \item Measurement of Uranium Subcritical and Critical IER 488 (MUSiC) experiment \cite{music2021}.
 \end{itemize}
 Runtime and errors were then compared to draw conclusions.
-This work was published in a conference publication \cite{morgan2023oci} (\textit{see appendix \ref{app:cise}}).
+This work was published in a conference publication \cite{morgan2023oci} (see Appendix~\ref{app:hybridmcatk}).
 
 In MC/DC I propose a slight alteration to the hybrid-scheme developed and deployed in my previous work in MCATK.
-Current versions of MC/DC do not stop particles at mesh crossings and uses a track-length estimator to tally impacts to multiple cells at once.
-Using this algorithm already in MC/DC, delta tracking could be used in conjunction with the track length estimator as in the previous work in MCATK.
-However the proposed algorithm in MC/DC will more closely resemble the vanilla delta tracking algorithm and not stop particles at now cell and surface crossings.
+Current versions of MC/DC do not stop particles at mesh crossings when using surface tracking and use a track-length estimator to tally impacts to multiple cells at once.
+Using this tally algorithm already in MC/DC, delta tracking could be used in conjunction with the track length estimator as in the previous work in MCATK.
+However the proposed algorithm in MC/DC will more closely resemble the vanilla delta tracking algorithm and not stop particles at now cell \textit{and} surface crossings.
 Other quantities of interest will be tallied with collision estimator as the specific material data is required for values like fission reaction rate.
 This will require additional computational burden but the hope is that the new tally functionality in MC/DC is sufficiently optimized to still allow this scheme to be more performant.
 
@@ -339,7 +340,9 @@ The most common figure of merit and the one I will employ is simply
 \end{equation}
 where $\sigma^2$ is the variance as already computed by MC solvers and $t_{wc}$ is the total wall-clock-runtime.
 Using this metric (higher is better) variance reduction shames can be compared to each other and the analog solver.
-I propose using this metric to evaluate the impact of the hybrid-delta tracking scheme I plan to implement in MC/DC in a problem of interest.
+I propose using this metric to evaluate the impact of the hybrid-delta tracking scheme 
+I plan to initially verify the tracking algorithm in MC/DC using the AZURV1 benchmark problem \cite{ganapol_homogeneous_2001}.
+Then compare figures of merrit on problems of interest.
 Potential problems of interest include:
 \begin{enumerate}
     \item Dragon burst problem \cite{kimpland2021dragon};

@@ -1,8 +1,8 @@
 \chapter{Objectives}
 \label{ch:objectives}
 
-\section{GPU enabled time dependent neutron radiation transport}
-This exploration attempts to answer RQ 1.
+\section{GPU-enabled time dependent neutron radiation transport}
+This investigation attempts to answer RQ 1.
 \begin{enumerate}
     \item \textbf{DONE} Compare portability frameworks for Monte Carlo neutron transport deployment on both GPU and CPU platforms in a transient code
     \item \textbf{DONE} Support the production of a full Monte Carlo transport code and aid in the deployment to other accelerators
@@ -11,7 +11,7 @@ This exploration attempts to answer RQ 1.
 \end{enumerate}
 
 
-\section{Explorations into GPU optimized deterministic schemes}
+\section{GPU optimized deterministic schemes}
 This investigation attempts to answer RQ 1 and 2, 3.
 \begin{enumerate}
     \item \textbf{DONE} Derive discretization scheme for time dependent, multi-group, Sn, neutron transport in slab geometry
@@ -24,19 +24,19 @@ This investigation attempts to answer RQ 1 and 2, 3.
     \item \textbf{ONGOING} Publish this work.
 \end{enumerate}
 
-\section{Exploration of acceleration schemes for One-cell inversion}
+\section{Acceleration schemes for One-cell inversion}
 This exploration attempt to answer RQ 4
 \begin{enumerate}
     %\item \textbf{ONGOING} Implement diffusion synthetic acceleration to Source iteration to have a comparison. This will eventually serve as a comparison;
     \item \textbf{ONGOING} Derive and postulate various potential acceleration schemes, then down select to one or two schemes
-    \item Do fourier analysis on selected scheme
+    \item Perform Fourier analysis on selected scheme
     \item Implement acceleration scheme in code
     \item Verify convergence to correct value using method of manufactured solutions and/or Monte Carlo results
     \item Explore convergence rate in various problems
     \item Publish this work
 \end{enumerate}
 
-\section{Exploration of delta tracking using a hybrid tally}
+\section{Delta tracking using a hybrid tally}
 This study attempts to answer RQ 5
 \begin{enumerate}
     \item \textbf{DONE} Implement the hybrid-delta tracking algorithm on a structured mesh in MCATK
@@ -50,11 +50,11 @@ This study attempts to answer RQ 5
 \end{enumerate}
 
 \section{Possible difficulties and contingencies}
-The largest and most risky open question left in this research is whether we can find an acceleration scheme for one cell inversions in the thin limit.
-While explorations that result in a negative result are still essential and worth while, I list a few contingencies if acceleration schemes prove more difficult to come by:
+The largest and most risky open question left in this research are whether I can find an acceleration scheme for one-cell inversions in the thin limit.
+While investigations that result in a negative result are still essential and worth while, I list a few contingencies if acceleration schemes prove more difficult to come by:
 \begin{enumerate}
-    \item Investigations into a multi-grid multi-group scheme enabled by the solution of all angles and groups within a cell;
-    \item 2D explorations of OCI with further performance analysis on GPUs using roofline models; and
-    \item Focusing an additional investigations into delta tracking in MC/DC, specifically looking at an adaptive energy scheme, where high energies with large MFPs use delta tracking and low energies use surface tracking.
+    \item Investigating a multi-grid multi-group scheme enabled by the solution of all angles and groups within a cell;
+    \item Investigating 2D of OCI with further performance analysis on GPUs using roofline models; and
+    \item Focusing an additional investigations into delta tracking in MC/DC, specifically looking at an adaptive energy scheme, where high energies (with large mean free paths) use delta tracking and low energies use surface tracking.
 \end{enumerate}
 
